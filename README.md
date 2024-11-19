@@ -16,23 +16,18 @@ Harmony is a tool using AI which allows you to compare items from questionnaires
 
 Here you can find example scripts for using the Python and R libraries.
 
+## R examples
+
+* Walkthrough R notebook in R Studio: <a href="https://harmonydata.ac.uk/harmony_r_example.nb.html" target="_parent"><img src="https://img.shields.io/badge/RStudio-4285F4" alt="Open In R Studio"/></a>
+* Walkthrough R notebook in Google Colab: <a href="https://colab.research.google.com/github/harmonydata/experiments/blob/main/Harmony_R_example.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> [View the PDF documentation of the R package on CRAN](https://cran.r-project.org/web/packages/harmonydata/harmonydata.pdf)
 
 
-# Quick start with the code
+## Python examples
 
-[Read our guide to contributing to Harmony here](https://harmonydata.ac.uk/contributing-to-harmony/) or read [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-You can run the walkthrough Python notebook in [Google Colab](https://colab.research.google.com/github/harmonydata/harmony/blob/main/Harmony_example_walkthrough.ipynb) with a single click: <a href="https://colab.research.google.com/github/harmonydata/harmony/blob/main/Harmony_example_walkthrough.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
-
-You can also download an R markdown notebook to run in R Studio: <a href="https://harmonydata.ac.uk/harmony_r_example.nb.html" target="_parent"><img src="https://img.shields.io/badge/RStudio-4285F4" alt="Open In R Studio"/></a>
-
-You can run the walkthrough R notebook in Google Colab with a single click: <a href="https://colab.research.google.com/github/harmonydata/experiments/blob/main/Harmony_R_example.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> [View the PDF documentation of the R package on CRAN](https://cran.r-project.org/web/packages/harmonydata/harmonydata.pdf)
+* Walkthrough Python notebook in [Google Colab](https://colab.research.google.com/github/harmonydata/harmony/blob/main/Harmony_example_walkthrough.ipynb) with a single click: <a href="https://colab.research.google.com/github/harmonydata/harmony/blob/main/Harmony_example_walkthrough.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+* [Example script to strip prefixes from questions](./strip_common_prefixes_from_questions.ipynb)
 
 
-
-## 🖥 Installation instructions (video)
-
-[![Installing Harmony](https://raw.githubusercontent.com/harmonydata/.github/main/profile/installation_video.jpg)](https://www.youtube.com/watch?v=enWh0-4I0Sg "Installing Harmony")
 
 ## 🖱 Looking to try Harmony in the browser?
 
@@ -48,6 +43,13 @@ Harmony is based on four repositories: the core Python library, the API, the R p
    * [Web front end](https://github.com/harmonydata/app) - we welcome feedback and contributions on front end and UX issues
 * If you're doing research and found Harmony useful, please [cite us](/ai-in-mental-health/bmc-psychiatry-paper/)!
 * If you're a researcher trying to use the tool, and you encounter a problem, a bug, or a feature which you would like us to implement, please [raise an issue on Github](https://github.com/harmonydata/harmony) or [message us on Discord](https://discord.gg/harmonydata).
+
+[Read our guide to contributing to Harmony here](https://harmonydata.ac.uk/contributing-to-harmony/) or read [CONTRIBUTING.md](https://github.com/harmonydata/harmony/blob/main/CONTRIBUTING.md).
+
+## 🖥 Installation instructions for Python library (video)
+
+[![Installing Harmony](https://raw.githubusercontent.com/harmonydata/.github/main/profile/installation_video.jpg)](https://www.youtube.com/watch?v=enWh0-4I0Sg "Installing Harmony")
+
 
 ## Who to contact?
 
