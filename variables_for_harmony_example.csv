@@ -1,0 +1,608 @@
+survey_name,year,item_name,item_text,response_categories_cleaned
+ADVANCE,2016,Q1,Little interest or pleasure in doing things,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q2,"Feeling down, depressed, or hopeless",Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q3,"Trouble falling/staying asleep, sleeping too much",Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q4,Feeling tired or having little energy,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q5,Poor appetite or overeating,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q6,Feeling bad about yourself or that you are a failure or have let yourself or your family down,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q7,"Trouble concentrating on things, such as reading the newspaper or watching television.",Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q8,Moving or speaking so slowly that other people could have noticed. Or the opposite; being so fidgety or restless that you have been moving around a lot more than usual.,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q9,Thoughts that you would be better off dead or of hurting yourself in some way.,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q10,"Over the last two weeks, how often have you been bothered by the",Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q11,following problems?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q12,"Feeling nervous, anxious or on edge?",Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q13,Not being able to stop or control worrying?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q14,Worrying too much about different things?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q15,Trouble relaxing?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q16,Being so restless that it is hard to sit still?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q17,Becoming easily annoyed or irritable?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q18,Feeling afraid as if something awful might happen?,Not at all / Several days / More than half the days / Nearly every day
+ADVANCE,2016,Q19,"Under each heading, please tick the one box that best describes your health today:",I have no problems in walking about / I have slight problems in walking about / I have moderate problems in walking about / I have severe problems in walking about / I am unable to walk about / I have no problems washing or dressing myself / I have slight problems washing or dressing myself / I have moderate problems washing or dressing myself / I have severe problems washing or dressing myself / I am unable to wash or dress myself / I have no problems doing my usual activities / I have slight problems doing my usual activities / I have moderate problems doing my usual activities / I have severe problems doing my usual activities / I am unable to do my usual activities / I have no pain or discomfort / I have slight pain or discomfort / I have moderate pain or discomfort / I have severe pain or discomfort / I have extreme pain or discomfort / I am not anxious or depressed / I am slightly anxious or depressed / I am moderately anxious or depressed / I am severely anxious or depressed / I am extremely anxious or depressed
+ADVANCE,2016,Q20,Mobility,I have no problems in walking about / I have slight problems in walking about / I have moderate problems in walking about / I have severe problems in walking about / I am unable to walk about / I have no problems washing or dressing myself / I have slight problems washing or dressing myself / I have moderate problems washing or dressing myself / I have severe problems washing or dressing myself / I am unable to wash or dress myself / I have no problems doing my usual activities / I have slight problems doing my usual activities / I have moderate problems doing my usual activities / I have severe problems doing my usual activities / I am unable to do my usual activities / I have no pain or discomfort / I have slight pain or discomfort / I have moderate pain or discomfort / I have severe pain or discomfort / I have extreme pain or discomfort / I am not anxious or depressed / I am slightly anxious or depressed / I am moderately anxious or depressed / I am severely anxious or depressed / I am extremely anxious or depressed
+ADVANCE,2016,Q21,Self-care,I have no problems in walking about / I have slight problems in walking about / I have moderate problems in walking about / I have severe problems in walking about / I am unable to walk about / I have no problems washing or dressing myself / I have slight problems washing or dressing myself / I have moderate problems washing or dressing myself / I have severe problems washing or dressing myself / I am unable to wash or dress myself / I have no problems doing my usual activities / I have slight problems doing my usual activities / I have moderate problems doing my usual activities / I have severe problems doing my usual activities / I am unable to do my usual activities / I have no pain or discomfort / I have slight pain or discomfort / I have moderate pain or discomfort / I have severe pain or discomfort / I have extreme pain or discomfort / I am not anxious or depressed / I am slightly anxious or depressed / I am moderately anxious or depressed / I am severely anxious or depressed / I am extremely anxious or depressed
+ADVANCE,2016,Q22,"Usual activities (e.g. work, study, housework, family or leisure activities)",I have no problems in walking about / I have slight problems in walking about / I have moderate problems in walking about / I have severe problems in walking about / I am unable to walk about / I have no problems washing or dressing myself / I have slight problems washing or dressing myself / I have moderate problems washing or dressing myself / I have severe problems washing or dressing myself / I am unable to wash or dress myself / I have no problems doing my usual activities / I have slight problems doing my usual activities / I have moderate problems doing my usual activities / I have severe problems doing my usual activities / I am unable to do my usual activities / I have no pain or discomfort / I have slight pain or discomfort / I have moderate pain or discomfort / I have severe pain or discomfort / I have extreme pain or discomfort / I am not anxious or depressed / I am slightly anxious or depressed / I am moderately anxious or depressed / I am severely anxious or depressed / I am extremely anxious or depressed
+ADVANCE,2016,Q23,Pain/discomfort,I have no problems in walking about / I have slight problems in walking about / I have moderate problems in walking about / I have severe problems in walking about / I am unable to walk about / I have no problems washing or dressing myself / I have slight problems washing or dressing myself / I have moderate problems washing or dressing myself / I have severe problems washing or dressing myself / I am unable to wash or dress myself / I have no problems doing my usual activities / I have slight problems doing my usual activities / I have moderate problems doing my usual activities / I have severe problems doing my usual activities / I am unable to do my usual activities / I have no pain or discomfort / I have slight pain or discomfort / I have moderate pain or discomfort / I have severe pain or discomfort / I have extreme pain or discomfort / I am not anxious or depressed / I am slightly anxious or depressed / I am moderately anxious or depressed / I am severely anxious or depressed / I am extremely anxious or depressed
+ADVANCE,2016,Q24,Anxiety/depression,I have no problems in walking about / I have slight problems in walking about / I have moderate problems in walking about / I have severe problems in walking about / I am unable to walk about / I have no problems washing or dressing myself / I have slight problems washing or dressing myself / I have moderate problems washing or dressing myself / I have severe problems washing or dressing myself / I am unable to wash or dress myself / I have no problems doing my usual activities / I have slight problems doing my usual activities / I have moderate problems doing my usual activities / I have severe problems doing my usual activities / I am unable to do my usual activities / I have no pain or discomfort / I have slight pain or discomfort / I have moderate pain or discomfort / I have severe pain or discomfort / I have extreme pain or discomfort / I am not anxious or depressed / I am slightly anxious or depressed / I am moderately anxious or depressed / I am severely anxious or depressed / I am extremely anxious or depressed
+ADVANCE,2016,Q25,We would like to know how good or bad your health is today.,"Scale ranging from 0 to 100, where 100 = 'the best health you can imagine' and 0 = 'the worst health you can imagine'"
+ADVANCE,2016,Q26,"Repeated, disturbing memories, thoughts, or images of a stressful experience?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q27,"Repeated, disturbing dreams of a stressful experience?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q28,Suddenly acting or feeling as if a stressful experience were happening again (as if you were re-living it)?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q29,Feeling very upset when something reminded you of a stressful experience?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q30,"Having physical reactions (e.g. heart pounding, trouble breathing, sweating) when something reminded you of a stressful experience?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q31,Avoiding thinking about or talking about a stressful experience?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q32,Avoiding activities or situations because they reminded you of a stressful experience?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q33,Trouble remembering important parts of a stressful experience?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q34,Loss of interest in activities that you used to enjoy?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q35,Feeling distant or cut-off from other people?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q36,Feeling emotionally numb or being unable to have loving feelings to those who are close to you?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q37,Feeling as if your future will somehow be cut short?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q38,Having trouble falling or staying asleep?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q39,Feeling irritable or having angry outbursts?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q40,Having difficulty concentrating?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q41,"Being super alert, watchful or on-guard?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q42,Feeling jumpy or easily startled?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2016,Q43,How often do you have a drink containing alcohol?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q44,How many units of alcohol do you drink on a typical day when you are drinking?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q45,How often do you have six or more units of alcohol on one occasion?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q46,How often during the last year have you found that you were not able to stop drinking once you had started?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q47,How often during the last year have you failed to do what was normally expected from you because of drinking?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q48,How often during the last year have you needed a first drink in the morning to get yourself going after a heavy drinking session?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q49,How often during the last year have you had a feeling of guilt or remorse after drinking?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q50,How often during the last year have you been unable to remember what happened the night before because you had been drinking?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q51,Have you or someone else been injured as a result of your drinking?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q52,Has a relative or friend or doctor or another health worker been concerned about your drinking or suggested you cut down?,"Never / Monthly or less / 2-4 times a month / 2-3 times a week / 4 or more times a week / 1 or 2 / 3 or 4 / 5 or 6 / 7, 8 or 9 / 10 or more / Q3, 4, 5, 6, 7, 8 / Never / Less than Monthly / Monthly / Weekly / Daily or almost daily / Q9, 10 / No / Yes, but not in the last year / Yes, during the last year"
+ADVANCE,2016,Q53,The things I see as being really important in my life have changed,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q54,I appreciate the value of my own life more,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q55,I developed new interests,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q56,I developed a greater feeling of self-reliance,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q57,I developed a better understanding of spiritual matters,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q58,I can see more clearly that I can count on people in times of trouble,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q59,I set up a new direction for my life,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q60,I feel closer to other peopl,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q61,I am more willing to express my emotions,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q62,I am more confident that I can handle difficulties,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q63,I am able to do better things with my life,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q64,I am better able to accept the way things work out,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q65,I can better appreciate each day,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q66,New opportunities are available which wouldn't have been otherwise,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q67,I am more understanding of others,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q68,I put more effort into my relationships,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q69,I am more likely to try to change things that need changing,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q70,I have a stronger religious faith,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q71,I disovered that I am stronger than I thought I was,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q72,I learned to appreciate other people,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2016,Q73,I am more able to accept that I need other people,No change for the better / A small change for the better / A medium change for the better / A big change for the better
+ADVANCE,2019,Q74,Smoking Status?,Non-smoker / Ex-smoker / Light smoker (<10) / Moderate smoker (10-19) / Heavy smoker (20+)
+ADVANCE,2019,Q75,Little interest or pleasure in doing things,Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q76,"Feeling down, depressed, or hopeless",Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q77,"Trouble falling/staying asleep, sleeping too much",Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q78,Feeling tired or having little energy,Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q79,Poor appetite or overeating,Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q80,Feeling bad about yourself or that you are a failure or have let yourself or your family down,Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q81,"Trouble concentrating on things, such as reading the newspaper or watching television.",Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q82,Moving or speaking so slowly that other people could have noticed. Or the opposite; being so fidgety or restless that you have been moving around a lot more than usual.,Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q83,Thoughts that you would be better off dead or of hurting yourself in some way.,Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q84,"If you selected ANY problems listed above, how difficult have these problems made it for you to do your work, take care of things at home or get along with other people?",Q1-9 / Not at all / Several days / More than half the days / Nearly every day / Not at all difficult / Somewhat difficult / Very difficult / Extremely difficult
+ADVANCE,2019,Q85,"Repeated, disturbing, and unwanted memories of the stressful experience?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q86,"Repeated, disturbing dreams of the stressful experience?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q87,Suddenly feeling or acting as if the stressful experience were actually happening again (as if you were actually back there reliving it)?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q88,Feeling very upset when something reminded you of the stressful experience?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q89,"Having strong physical reactions when something reminded you of the stressful experience (for example, heart pounding, trouble breathing, sweating)?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q90,"Avoiding memories, thoughts, or feelings related to the stressful experience?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q91,"Avoiding external reminders of the stressful experience (for example, people, places, conversations, activities, objects, or situations)?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q92,Trouble remembering important parts of the stressful experience?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q93,"Having strong negative beliefs about yourself, other people, or the world (for example, having thoughts such as: I am bad, there is something seriously wrong with me,",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q94,"no one can be trusted, the world is completely dangerous)?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q95,Blaming yourself or someone else for the stressful experience or what happened after it?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q96,"Having strong negative feelings such as fear, horror, anger, guilt, or shame?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q97,Feeling distant or cut off from other people?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q98,"Trouble experiencing positive feelings (for example, being unable to feel happiness or have loving feelings for people close to you)?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q99,"Irritable behaviour, angry outbursts, or acting aggressively?",Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q100,Taking too many risks or doing things that could cause you harm?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q101,Being “superalert” or watchful or on guard?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q102,Trouble falling or staying asleep?,Not at all / A little bit / Moderately / Quite a bit / Extremely
+ADVANCE,2019,Q103,How often do you use drugs other than alcohol?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q104,Do you use more than one type of drug on the same occasion?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q105,How many times do you take drugs on a typical day when you use drugs?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q106,How often are you influenced heavily by drugs?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q107,"Over the past year, have you felt that your longing for drugs was so strong that you could not resist it?","Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q108,"Has it happened, over the past year, that you have not been able to stop taking drugs once you started?","Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q109,How often over the past year have you taken drugs and then neglected to do something you should have done?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q110,How often over the past year have you needed to take a drug the morning after heavy drug use the day before?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q111,How often over the past year have you had guilt feelings or a bad conscience because you used drugs?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q112,Have you or anyone else been hurt (mentally or physically) because you used drugs?,"Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q113,"Has a relative or a friend, a doctor or a nurse, or anyone else, been worried about your drug use or said to you that you should stop using drugs?","Q1,2, 4-11 / Never / Once a month or less often / 2-4 times a month / 2-3 times a week / 4 times or more a week / 0 / 1-2 / 3-4 / 5-6 / 7 or more"
+ADVANCE,2019,Q114,I worry all the time about whether the pain will end,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q115,I feel I can't go on,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q116,It's terrible and I think it's never going to get any better,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q117,It's awful and I feel that it overwhelms me,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q118,I feel I can't stand it anymore,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q119,I become afraid that the pain will get worse,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q120,I keep thinking of other painful events,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q121,I anxiously want the pain to go away,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q122,I can't seem to keep it out of my mind,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q123,I keep thinking about how much it hurts,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q124,I keep thinking about how badly I want the pain to stop,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q125,There's nothing I can do to reduce the intensity of the pain,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+ADVANCE,2019,Q126,I wonder whether something serious may happen,Not at all / To a slight degree / To a moderate degree / To a great degree / All the time
+AESOP-10,1997,Q1,Over 1800 possible items,Over 1800 possible items
+AESOP-10,1997,Q2,"""A standardised guide to psychiatric, medical, social and developmental history taking, with suggested probes and instructions for rating."" (Jablensky 1992)",
+AESOP-10,2007,Q3,Current mental state,Varied
+AESOP-10,2007,Q4,Lifetime diagnosis,Varied
+AESOP-10,2007,Q5,Time to remission,Varied
+AESOP-10,2007,Q6,Usual symptom severity,Varied
+AESOP-10,2007,Q7,Negative symptoms for 6+ months,Varied
+AESOP-10,2007,Q8,"Illness course type (episodic, continuous, neither)",Varied
+AESOP-10,2007,Q9,Number of admissions,Varied
+AESOP-10,2007,Q10,Number of community contacts,Varied
+AESOP-10,2007,Q11,Number of involuntary admissions,Varied
+AESOP-10,2007,Q12,Total amount of time in hospital,Varied
+AESOP-10,2007,Q13,Proportion of time in hospital,Varied
+AESOP-10,2007,Q14,Average length of hospital admission,Varied
+AESOP-10,2007,Q15,"to 100 scale where 1-10 indicates severe impairment or persistent danger of severely harming self or others, and 91-100 indicates no symptoms and superior functioning in a wide range of activities. See file",Rated using clinical interviewer's judgement of the participant's overall level of functioning
+AESOP-10,2007,Q16,Unchanged facial expression,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q17,Decreased spontaneous movements,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q18,Paucity of expressive gestures,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q19,Poor eye contact,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q20,Affective nonresponsiveness,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q21,Inappropriate affect,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q22,Lack of vocal inflections,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q23,Global rating of affective flattening,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q24,Poverty of speech,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q25,Poverty of content of speech,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q26,Blocking,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q27,Increased latency of response,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q28,Global rating of alogia,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q29,Grooming and hygiene,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q30,Impersistence at work or school,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q31,Physical anergia,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q32,"Global rating of avolition, apathy",None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q33,Recreational interests and activities,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q34,Sexual activity,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q35,Ability to feel intimacy and closeness,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q36,Relationships with friends and peers,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q37,"Global rating of anhedonia, asociality",None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q38,Social inattentiveness,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q39,Inattentiveness during mental status testing,None / Questionable / Mild / Moderate / Marked / Severe
+AESOP-10,2007,Q40,Global rating of attention,None / Questionable / Mild / Moderate / Marked / Severe
+AHMS,2004,Q1,"Over the last 2 weeks, how often have you been bothered by any of the following problems?",Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q2,Little interest or pleasure in doing things,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q3,"Feeling down, depressed or hopeless",Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q4,Trouble falling or staying asleep or sleeping too much,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q5,Feeling tired or having little energy,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q6,Poor appetite or overeating,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q7,Feeling bad about yourself or that you are a failure or have let yourself for your family down,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q8,"Trouble concentrating on things, such as reading the newspaper or watching television",Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q9,Moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q10,Thoughts that you would be better off dead or of hurting yourself in some way,Not at all / Several days / More than half the days / Nearly every day
+AHMS,2004,Q11,"Do you feel tense or ""wound up""?",Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q12,Do you get a sort of frightened feeling as if something awful is about to happen?,Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q13,Do worrying thoughts go through your mind?,Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q14,Can you sit at ease and feel relaxed?,Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q15,"Do you get a sort of frightened feeling like ""butterflies"" in the stomach?",Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q16,Do you feel restless as if you have to be on the move?,Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q17,Do you get sudden feelings of panic?,Not at all / Occasionally / Quite often / Very often
+AHMS,2004,Q18,Police work can involve dealing with stressful and sometimes traumatic incidents. Indeed such events may be so difficult that they are hard to erase from the memory. Think about the most recent or disturbing work related incident you have dealt with since we last saw you.,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q19,Can you think of any incident which is bothering you and which has occurred since [year of last assessment]?,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q20,Can you please briefly describe the event?,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q21,Please look at the events listed below. If you have experienced any of the reactions at least twice in the past week please tell us about it.,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q22,Upsetting thoughts or memories about the event that have come to your mind against your will,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q23,Upsetting dreams about the event,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q24,Acting or feeling as though the event were happening again,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q25,Feeling upset by reminders of the event,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q26,"Bodily reactions (such as fast heartbeat, stomach churning, sweatiness, dizziness) when reminded of the event.","Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q27,Difficulty falling or staying asleep,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q28,Irritability or outbursts of anger,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q29,Difficulty concentrating,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q30,Heightened awareness of potential dangers to yourself and others,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q31,Being jumpy or being startled at something unexpected.,"Yes/no / Free response, description of event / Q3-12 / Not at all / A little / Moderately / Quite a bit / Extremely"
+AHMS,2004,Q32,To what extent do you agree with the following statements about your normal day to day work for the Police Force?,Very satisfied / Satisfied / Dissatisfied / Very dissatisfied
+AHMS,2004,Q33,How satisfied are you with your job as a whole?,Very satisfied / Satisfied / Dissatisfied / Very dissatisfied
+AHMS,2004,Q34,Does your mood often go up and down?,Yes/no items
+AHMS,2004,Q35,Are you a talkative person?,Yes/no items
+AHMS,2004,Q36,Do you ever feel 'just miserable' for no reason?,Yes/no items
+AHMS,2004,Q37,Are you rather lively?,Yes/no items
+AHMS,2004,Q38,Are you an irritable person?,Yes/no items
+AHMS,2004,Q39,Do you enjoy meeting new people?,Yes/no items
+AHMS,2004,Q40,Are your feelings easily hurt?,Yes/no items
+AHMS,2004,Q41,Can you usually let yourself go and enjoy yourself at a lively party?,Yes/no items
+AHMS,2004,Q42,Do you often feel 'fed-up'?,Yes/no items
+AHMS,2004,Q43,Do you usually take initiative in making new friends?,Yes/no items
+AHMS,2004,Q44,Would you call yourself a nervous person?,Yes/no items
+AHMS,2004,Q45,Can you easily get some life into a rather dull party?,Yes/no items
+AHMS,2004,Q46,Are you a worrier?,Yes/no items
+AHMS,2004,Q47,Do you tend to keep in the background on social occasions?,Yes/no items
+AHMS,2004,Q48,Would you call yourself tense or 'highly-strung'?,Yes/no items
+AHMS,2004,Q49,Do you like mixing with people?,Yes/no items
+AHMS,2004,Q50,Do you worry too long after an embarrassing experience?,Yes/no items
+AHMS,2004,Q51,Do you like plenty of bustle and excitement around you?,Yes/no items
+AHMS,2004,Q52,Do you suffer from 'nerves'?,Yes/no items
+AHMS,2004,Q53,Are you mostly quiet when you are with other people?,Yes/no items
+AHMS,2004,Q54,Do you often feel lonely?,Yes/no items
+AHMS,2004,Q55,Do other people think of you as being very lively?,Yes/no items
+AHMS,2004,Q56,Are you often troubled about feelings of guilt?,Yes/no items
+AHMS,2004,Q57,Can you get a party going?,Yes/no items
+ALSPAC,1990,Q1,Please indicate the way you feel at this stage in your pregnancy.,Very often / Often / Not very often / Never
+ALSPAC,1990,Q2,Do you feel upset for no obvious reason?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q3,Do you get troubled by dizziness or shortness of breath?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q4,Have you felt as though you might faint?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q5,Do you feel sick or have indigestion?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q6,Do you feel that life is too much effort?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q7,Do you feel uneasy and restless?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q8,"Do you feel tingling or prickling sensations in your body, arms or legs?",Very often / Often / Not very often / Never
+ALSPAC,1990,Q9,Do you regret much of your past behaviour?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q10,Do you sometimes feel panicky?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q11,Do you find that you have little or no appetite?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q12,Do you wake unusually early in the morning?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q13,Do you worry a lot?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q14,Do you feel tired or exhausted?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q15,Do you experience long periods of sadness?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q16,Do you feel strung-up inside?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q17,Can you get off to sleep alright?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q18,Do you ever have the feeling you are going to pieces?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q19,Do you often have excessive sweating or fluttering of the heart?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q20,Do you find yourself needing to cry?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q21,Do you have bad dreams which upset you when you wake up?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q22,Do you lose the ability to feel sympathy for others?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q23,Can you think quickly?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q24,Do you have to make a special effort to face up to a crisis or difficulty?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q25,I have been able to laugh and see the funny side of things,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q26,I have looked forward with enjoyment to things,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q27,I have blamed myself unnecessarily when things went wrong,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q28,I have been anxious or worried for no good reason,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q29,I have felt scared or panicky for no very good reason,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q30,Things have been getting on top of me,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q31,I have been so unhappy that I have had difficulty sleeping,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q32,I have felt sad or miserable,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q33,I have been so unhappy that I have been crying,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q34,The thought of harming myself has occurred to me,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q35,Over the past four weeks:,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q36,Has thinking about your shape or weight interfered with your ability to concentrate on things?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q37,Have you been afraid that you may become fat?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q38,Have you felt fat?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q39,Have you had a strong desire to lose weight?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q40,Has your weight influenced how you think about yourself as a person?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q41,Have you felt dissatisfied about your weight?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q42,Have you felt dissatisfied about your shape?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q43,Have you felt concerned about other people seeing you eat?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q44,Have you felt uncomfortable seeing your body in your mirror?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q45,Have you experience a loss of control over eating?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q46,In the three months before you became pregnant:,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q47,Did thinking about your shape or weight interfere with your ability to concentrate on things?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q48,were you afraid that you might become fat?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q49,Did you feel fat?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q50,Did you have a strong desire to lose weight?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q51,Did your weight influence how you thought about yourself as a person?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q52,Did you feel dissatisfied about your weight?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q53,Did you feel dissatisfied about your shape?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q54,Did you feel concerned about other people seeing you eat?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q55,Did you feel uncomfortable seeing your body in the mirror?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q56,Did you experience a loss of control over eating?,Not at all / Yes occasionally / Yes most of the time
+ALSPAC,1990,Q57,Do you wake unusually early in the morning,Very often / Often / Not very often / Never
+ALSPAC,1990,Q58,Do you lose the ability to feel sympathy for other?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q59,I have been so unhappy that i have had difficulty sleeping,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q60,Can you think as quickly as you used to?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q61,I have been so unhappy that I have difficulty sleeping,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q62,On the whole are there more good days than bad?,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q63,I feel that I am a person of worth at least equal to others,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q64,I feel I have a number of good qualities,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q65,I am able to do things as well as most other people,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q66,I feel I do not have much to be proud of,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q67,I take a positive attitude towards myself,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q68,Sometimes I think I am no good at all,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q69,I am a useful person to have around,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q70,I feel I cannot do anything right,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q71,When I do a job I do it well,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q72,I feel that my life is not very useful,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q73,I am unlucky,Almost always true / Often true / Sometimes true / Seldom true / Never true
+ALSPAC,1990,Q74,Do you wake unusually early in the morning even when you haven't been woken by the family?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q75,Do you feel strung up inside?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q76,Can you go to sleep alright?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q77,I have felt scared or panicky for no good reason,"Varying 4-point scale, eg: / Yes most of the time / Yes, quite often / Only occasionally / No, never"
+ALSPAC,1990,Q78,Is considerate of other people's feelings,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q79,"Is restless, overactive, cannot stay still for long",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q80,"Often complains of headaches, stomach-aches or sickness",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q81,"Shares readily with other children (treats, toys, pencils etc)",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q82,Often has temper tantrums or hot tempers,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q83,"Is rather solitary, tends to play alone",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q84,"Is generally obedient, usually does what adults request",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q85,"Has many worries, often seems worried",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q86,"Is helpful if someone is hurt, upset or feeling ill",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q87,Is constantly fidgeting or squirming,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q88,Has at least one good friends,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q89,Often fights with other children or bullies them,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q90,"Is often unhappy, down hearted or tearful",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q91,Is generally liked by other children,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q92,"Is easily distracted, concentration wanders",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q93,"Is nervous or clingy in new situations, easily loses confidence",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q94,Is king to younger children,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q95,Often lies or cheats,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q96,Is picked on or bullied by other children,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q97,"Often volunteers to help others (parents, teachers, other children)",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q98,Thinks things out before acting,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q99,"Steals from home, school or elsewhere",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q100,Gets on better with adults than with other children,Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q101,"Has many fears, is easily scared",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q102,"Sees tasks through to the end, has good attention span",Doesn't apply / Applies somewhat / Certainly applies
+ALSPAC,1990,Q103,How good would you describe her at sitting still (for a meal or story)?,Is very active - doesn’t sit still when she should Can usually sit still when she should / Can sit still for a long time / Is very inactive / Up to 2 minutes / 2-5 minutes / 5-10 minutes / 10-15 minutes / More than 15 minutes / Q3-6 / Less than once a month / Once a month / Once a week / Once a day / More than once a day
+ALSPAC,1990,Q104,How long can she concentrate on a game or task you have given her to do?,Is very active - doesn’t sit still when she should Can usually sit still when she should / Can sit still for a long time / Is very inactive / Up to 2 minutes / 2-5 minutes / 5-10 minutes / 10-15 minutes / More than 15 minutes / Q3-6 / Less than once a month / Once a month / Once a week / Once a day / More than once a day
+ALSPAC,1990,Q105,How often is she too demanding of you? (e.g. asking for help for a task she can do herself),Is very active - doesn’t sit still when she should Can usually sit still when she should / Can sit still for a long time / Is very inactive / Up to 2 minutes / 2-5 minutes / 5-10 minutes / 10-15 minutes / More than 15 minutes / Q3-6 / Less than once a month / Once a month / Once a week / Once a day / More than once a day
+ALSPAC,1990,Q106,"How often, does she whine or moan with little reason?",Is very active - doesn’t sit still when she should Can usually sit still when she should / Can sit still for a long time / Is very inactive / Up to 2 minutes / 2-5 minutes / 5-10 minutes / 10-15 minutes / More than 15 minutes / Q3-6 / Less than once a month / Once a month / Once a week / Once a day / More than once a day
+ALSPAC,1990,Q107,"How often, is she unhappy for no apparent reason?",Is very active - doesn’t sit still when she should Can usually sit still when she should / Can sit still for a long time / Is very inactive / Up to 2 minutes / 2-5 minutes / 5-10 minutes / 10-15 minutes / More than 15 minutes / Q3-6 / Less than once a month / Once a month / Once a week / Once a day / More than once a day
+ALSPAC,1990,Q108,"How often, if you leave the room does she want to follow you?",Is very active - doesn’t sit still when she should Can usually sit still when she should / Can sit still for a long time / Is very inactive / Up to 2 minutes / 2-5 minutes / 5-10 minutes / 10-15 minutes / More than 15 minutes / Q3-6 / Less than once a month / Once a month / Once a week / Once a day / More than once a day
+ALSPAC,1990,Q109,Do you wake unusually early in the morning even when you haven't been woken by your children?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q110,Can you go to sleep all right?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q111,Do you ever have the feeling you are going to pieces?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q112,Considerate of others' feelings,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q113,"Restless, overactive, cannot stay still long",Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q114,Complains of headaches/stomach-aches/sickness,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q115,Shares readily with others,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q116,Often has temper tantrums,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q117,Tends to play alone,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q118,Generally obedient,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q119,Often seems worried,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q120,"Helpful if someone is hurt, upset or ill",Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q121,Constantly fidgeting,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q122,Has at least one good friend,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q123,Fights with or bullies other children,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q124,Often unhappy,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q125,Generally liked by other children,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q126,Easily distracted,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q127,Nervous or clingy in new situations,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q128,Kind to younger children,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q129,Often argumentative with adults,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q130,Picked on or bullied by other children,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q131,Often volunteers to help others,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q132,Can stop and think before acting,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q133,Can be spiteful to others,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q134,Gets on better with adults,Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q135,"Many fears, easily scared",Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q136,"Sees tasks through to the end, good attention span",Not true / Somewhat true / Certainly true / Don't know
+ALSPAC,1990,Q137,[How much do the following statements apply to your study teenager?],Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q138,Not aware of other people's feelings,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q139,Does not realise when others are upset or angry,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q140,Does not notice the effect of her behaviour on other members of the family,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q141,Her behaviour often disrupts normal family life,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q142,Very demanding of other people's time,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q143,Difficult to reason with when upset,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q144,"Does not seem to understand social skills, e.g. interrupts conversations constantly",Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q145,Does not pick up on body language,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q146,"Does not understand how s/he should behave when s/he is out, e.g. in shops or other people's houses",Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q147,Does not realise that s/he offends people with her behaviour,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q148,Does not respond when told to do something,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q149,Cannot follow a command unless it is carefully worded,Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q150,Do you have any other comments or concerns? [Specify],Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q151,I feel:,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q152,Secure,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q153,Strained,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q154,At ease,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q155,I am presently worrying over possible misfortunes,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q156,Satisfied,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q157,Frightened,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q158,Comfortable,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q159,Self-confident,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q160,Nervous,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q161,Jittery,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q162,Indecisive,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q163,Relaxed,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q164,Content,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q165,Worried,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q166,Confused,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q167,Steady,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q168,Pleasant,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q169,I feel pleasant,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q170,I tire quickly,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q171,I feel like crying,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q172,I wish I could be as happy as others seem to be,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q173,I am losing out on things because I can't make up my mind soon enough,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q174,I reel rested,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q175,"I am 'calm, cool and collected'",Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q176,I feel that difficulties are piling up so that I cannot overcome them,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q177,I worry too much over something that doesn't really matter,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q178,I am happy,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q179,I am inclined to take things hard,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q180,I lack self-confidence,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q181,I feel secure,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q182,I try to avoid facing a crisis or difficulty,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q183,I feel blue,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q184,I am content,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q185,Some unimportant thought runs through my mind and bothers me,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q186,I take disappointment so keenly that I can't put them out of my mind,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q187,I am a steady person,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q188,I become tense and upset when I think about my present concerns,Doesn't apply / Applies a bit / Moderately applies / Certainly applies
+ALSPAC,1990,Q189,Is considerate of others' feelings,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q190,"Is restless, overactive, cannot stay still long","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q191,"Often complains of headaches, stomach-aches or sickness","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q192,"Shares readily with other children (treats, toys, pencils etc.)","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q193,"Is rather solitary, tends to play alone","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q194,"Is generally obedient, usually does what adults request","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q195,"Has many worries, often seems worried","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q196,"Is helpful if someone is hurt, upset or feeling ill","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q197,Constantly fidgets or squirms,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q198,Has at least one good friend,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q199,Often fights with other children or bullies them,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q200,"Is often unhappy, down-hearted or tearful","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q201,Is generally liked by other children,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q202,"Is nervous or clingy in new situations, easily loses confidence","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q203,Is kind to younger children,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q204,Is picked on or bullied by other children,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q205,"Often volunteers to help others (parents, teachers, other children)","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q206,Thinks things out before acting,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q207,Gets on better with adults than with other children,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q208,"Has many fears, is easily scared","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q209,"Sees tasks through to the end, good attention span","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q210,Do you have any other comments or concerns?,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q211,"IS 1. . Overall, to summarise, do you think that this child has difficulties in one or more of the following areas: emotions, concentration, behaviour or being able to get on with other people?","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q212,"If IS 1 = yes,","Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q213,IS2. How long have these difficulties been present?,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q214,IS3. Do the difficulties upset or distress the child?,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q215,Do the difficulties interfere with the child’s everyday life in the following areas?,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q216,IS4. Peer relationships,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q217,IS5. Classroom learning,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q218,IS6. Do the difficulties put a burden on you or the class as a whole?,"Q1-21 / Not true / Somewhat true / Certainly true / Free response, text / Impact Supplement 1 / No / Yes, minor difficulties / Yes, definite difficulties / Yes, severe difficulties / Impact Supplement 2 / Less than 1 month / 1-5 months / 6-12 months / Over a year / Don't know / Impact Supplement 3-6 / Not at all / Only a little / Quite a lot / A great deal"
+ALSPAC,1990,Q219,Have you felt as though you might faint?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q220,Do you wake unusually early in the morning,Very often / Often / Not very often / Never
+ALSPAC,1990,Q221,Do you feel strung-up inside?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q222,Do you have bad dreams which upset you when you wake up?,Very often / Often / Not very often / Never
+ALSPAC,1990,Q223,"I feel that I'm a person of worth, at least on an equal plane with others",Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q224,I feel that I have a number of good qualities,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q225,I am able to do things as well as most other people,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q226,I feel that I do not have much to be proud of,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q227,I take a positive attitude towards myself,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q228,Sometimes I think I am no good at all,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q229,I am a useful person to have around,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q230,I feel I can't do anything right,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q231,"When I do a job, I do it well",Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q232,I feel that my life is not very useful,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q233,I am unlucky,Almost always true / Often true / Sometimes true / Not often true / Never true
+ALSPAC,1990,Q234,S/he felt miserable or unhappy,True / Sometimes true / Not true
+ALSPAC,1990,Q235,S/he didn’t enjoy anything at all,True / Sometimes true / Not true
+ALSPAC,1990,Q236,S/he felt so tired that s/he just sat around and did nothing,True / Sometimes true / Not true
+ALSPAC,1990,Q237,S/he was very restless,True / Sometimes true / Not true
+ALSPAC,1990,Q238,S/he felt s/he was no good any more,True / Sometimes true / Not true
+ALSPAC,1990,Q239,S/he cried a lot,True / Sometimes true / Not true
+ALSPAC,1990,Q240,S/he found it hard to think properly or concentrate,True / Sometimes true / Not true
+ALSPAC,1990,Q241,S/he hated herself/himself,True / Sometimes true / Not true
+ALSPAC,1990,Q242,S/he felt s/he was a bad person,True / Sometimes true / Not true
+ALSPAC,1990,Q243,S/he felt lonely,True / Sometimes true / Not true
+ALSPAC,1990,Q244,S/he thought nobody really loved her,True / Sometimes true / Not true
+ALSPAC,1990,Q245,S/he thought s/he could never be as good as other kids,True / Sometimes true / Not true
+ALSPAC,1990,Q246,S/he felt s/he did everything wrong,True / Sometimes true / Not true
+ALSPAC,1990,Q247,[How much do the following statements apply to your study child?],Not true / Quite or sometimes true / Very or often true
+ALSPAC,1990,Q248,(Blue) Some children feel that they are very good at their school work / (Red) Other children worry about whether they can do the school work that they have been given,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q249,(Blue) Some children are often unhappy with themselves / (Red) Other children are pretty pleased with themselves,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q250,(Blue) Some children feel like they are just as clever as other children their age / (Red) Other children aren’t so sure and wonder if they are as clever,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q251,(Blue) Some children don’t like the way they are living their life / (Red) Other children do like the way they are living their life,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q252,(Blue) Some children are pretty slow in finishing their school work / (Red) Other children can do their school work quickly,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q253,(Blue) Some children are happy with themselves as a person / (Red) Other children are often not happy with themselves as a person,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q254,(Blue) Some children often forget what they learn / (Red) Other children can remember things easily,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q255,(Blue) Some children like the kind of person they are / (Red) Other children often wish they were someone else,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q256,(Blue) Some children do very well at their classwork / (Red) Other children don't do very well at their classwork,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q257,(Blue) Some children are very happy being the way they are / (Red) Other children wish they were different,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q258,(Blue) Some children have trouble working out the answers in school / (Red) Other children can almost always work out the answer,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q259,(Blue) Some children are not very happy with the way they do a lot of things / (Red) Other children think the way they do things is fine,"Blue, really true for me / Blue, sort of true for me / Red, really true for me / Red, sort of true for me"
+ALSPAC,1990,Q260,Irritability/Negative Emotionality,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q261,Lability,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q262,Frustration tolerance,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q263,Hostility,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q264,Roughness,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q265,Resistance,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q266,Impulsivity/Distractibility,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q267,Restlessness,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q268,Impulsivity,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q269,Fleeting attention,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q270,Lacking persistence,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+ALSPAC,1990,Q271,Approach,Behaviour not characteristic of the child / Behaviour somewhat characteristic of the child / Behaviour characteristic of the child
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q1,Mother's forename only:,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q2,Infant's forename only:,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q3,Infant's date of birth,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q4,Date of interview,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q5,Interviewer,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q6,Was he/she breast fed after the age of 6 months?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q7,Are you still breast feeding?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q8,*What is the main reason for continuing to breast feed?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q9,How old was your baby when he/she last had a breast feed? ... mths ... wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q10,or On what date did he/she last have a breast feed?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q11,In the past 4 weeks did he/she have any expressed breast milk?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q12,"Except for breast milk, has he/she had any other milk or formula in the past 6 months?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q13,"How old was your baby when he/she started regularly having other milk or formula feeds from a bottle or cup, OR FOR MIXING WITH SOLIDS? ... mths ... wks ... days",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q14,or On what date did he/she start regularly having milk or formula feeds?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q15,Are you currently employed in paid work ?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q16,What is your current job? Job Position,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q17,What is your current job?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q18,What is your current job? Industry,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q19,How old was the baby when you went back to work? ... mths ... wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q20,or on what date did you go back to work ?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q21,How many hours did you work over the last week ? ... hrs ... mins,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q22,Measurement Date,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q23,Subscapular skinfold: Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q24,Skinfold calipers used,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q25,Crown-rump length (infantometer): Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q26,Crown-heel length (left leg) (infantometer): Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q27,Minimum carriage reading ... mm,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q28,Anthropometer used,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q29,Baby weight (preferably nude) ... kg,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q30,Weight of any clothes / nappy ... kg,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q31,Time (24 hr clock),
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q32,Measurer,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q33,Helpers (Parent 90),
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q34,Occipito-frontal circumference: Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q35,Left mid-upper arm circumference (arm straight): Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q36,Chest circumference: Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q37,Abdominal circumference: Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q38,Triceps skinfold: Crying,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q39,Number of teeth,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q40,Position of teeth,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q41,How old was your baby when he/she cut his/her first tooth? ... mths ... wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q42,or on what date did he/she cut his/her first tooth ?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q43,Is/are there any? Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q44,Is/are there any? Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q45,Trunk - back Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q46,Trunk - back Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q47,Trunk - front (chest & abdomen) Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q48,Trunk - front (chest & abdomen) Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q49,Legs - soles of feet Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q50,Legs - soles of feet Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q51,Legs - popliteal fossae (behind knees) Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q52,"Legs - popliteal fossae (behind knees) Legs - remainder of (ie. thighs, lower leg, dorsa feet) Birthmarks",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q53,"Legs - remainder of (ie. thighs, lower leg, dorsa feet) Eczema*",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q54,Nappy area (incl. nappy rash) Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q55,Nappy area (incl. nappy rash) Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q56,Scalp / Behind ears Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q57,Scalp / Behind ears Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q58,Face - cheeks & forehead Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q59,Face - cheeks & forehead Face - around the mouth Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q60,Face - around the mouth Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q61,Neck Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q62,Neck Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q63,Arms - palms of the hands Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q64,Arms - palms of the hands Birthmarks,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q65,Arms - antecubital fossae Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q66,"Arms - antecubital fossae Arms - remainder (backs of hands, forearms, upper arms) Arms - axillae Birthmarks",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q67,"Arms - remainder (backs of hands, forearms, upper arms) Eczema*",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q68,Arms - axillae Eczema*,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q69,Skin prick tester,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q70,*Did your baby eat any dried baby foods in the past 4 weeks?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q71,"During the past 4 weeks have you given him/her any vitamins or minerals, including iron and fluoride drops?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q72,"*Did your baby eat any jars, tins or pots of baby foods in the past 4 weeks?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q73,Yoghurt and fromage frais,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q74,What is the main type?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q75,"Is there anything else he/she has had to eat or drink 4 or more times (that is, about once a week or more) in the past 4 weeks that we have not already included?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q76,"On average over the past 4 weeks, how many meals per week were given to your baby by someone other than yourself?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q77,*How many of the meals given by others were you able to include in the previous questions?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q78,Was he/she eating solid foods by 6 months of age?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q79,How old was he/she when solids were first regularly introduced? ... mths .. wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q80,or On what date were solids first regularly introduced?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q81,What was the first solid food he/she regularly ate?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q82,"Can he/she drink from an ordinary cup or glass, or have you never tried?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q83,"Has he/she had any episodes of chestiness associated with wheezing or whistling in his/her chest? (includes wheezy bronchitis, asthma) Yes - number of times",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q84,How old was he/she at the start of the first episode ? ... mths ... wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q85,"In the past six months, other than during the first week of a cold, has he/she woken at night with coughing for 3 or more nights in a row?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q86,"In the past six months has he/she ever been diagnosed by a doctor as having had pneumonia or bronchiolitis? (don't include bronchitis or ""chest infection"") Yes - number of times",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q87,"In the past six months, has he/she ever been diagnosed by a doctor as having had a chest infection or bronchitis ? (includes wheezy bronchitis) Yes - number of times",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q88,"In the past six months, has he/she had any episodes of croup or a croupy cough ? (i.e. a barking cough worse at night) Yes - number of episodes",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q89,"In the past six months, has he/she had any bouts of vomiting lasting 2 days or longer ? (do not include possetting or regurgitation) Yes - number of bouts",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q90,"In the past six months, has he/she had any bouts of diarrhoea lasting 2 days or longer ? Yes - number of bouts",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q91,"In the past six months, has he/she ever been diagnosed by a doctor as having an ear infection ? Yes - number of times",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q92,Has he/she ever been given antibiotics as a treatment?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q93,How old was he/she when first given them? ... mths ... wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q94,or on what date was he/she first given them ?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q95,How many times have they been prescribed for him/her?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q96,Has he/she had any antihistamine syrup in the last 7 days?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q97,Has he/she had an itchy skin condition at any time in the past six months - by itchy we mean scratching or rubbing the skin a lot ?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q98,"Has this skin condition affected the cheeks, the outer arms or legs, or the skin creases in the past - by skin creases we mean the folds of the elbows, behind the knees, the fronts of the ankles, or around the eyes ?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q99,How old was he/she when the rash first appeared ? ... mths ... wks ... days,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q100,"In the past six months, has he/she suffered from a generally dry skin ?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q101,"have you ever been able to clearly link a rash on his/her face, trunk or limbs with teething?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q102,or with specific foods,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q103,which foods?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q104,I would first like to ask whether you have kept a cat at home at any time in the past six months?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q105,is the cat kept:,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q106,*How often has he/she visited homes that keep a cat or cats in the past six months?.,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q107,is the cat kept:,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q108,"And similarly, have you kept a dog at home at any time in the past six months?",
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q109,is the dog kept:,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q110,*How often has he/she visited homes that keep a dog or dogs in the past six months?,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q111,is the dog kept:,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q112,*Does he/she sleep mainly,
+UK.MRCLEU-UOS.SWS/420A7207-EEC6-4ADE-947A-3DDF6A2F8F0D,2000,Q113,How many times per night (between midnight and 6am) does he/she generally wake for feeding or any other reason? Please answer this in relation to the last 2 weeks? ... per night,
