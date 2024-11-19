@@ -25,6 +25,7 @@ Here you can find example scripts for using the Python and R libraries.
 ## Python examples
 
 * Walkthrough Python notebook in [Google Colab](https://colab.research.google.com/github/harmonydata/harmony/blob/main/Harmony_example_walkthrough.ipynb) with a single click: <a href="https://colab.research.google.com/github/harmonydata/harmony/blob/main/Harmony_example_walkthrough.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+* [Example script to create a crosswalk table on real survey data](./create_harmony_crosswalks_in_python.ipynb)
 * [Example script to strip prefixes from questions](./strip_common_prefixes_from_questions.ipynb)
 
 
