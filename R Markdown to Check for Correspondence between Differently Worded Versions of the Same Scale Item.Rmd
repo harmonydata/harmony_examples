@@ -1,0 +1,1796 @@
+---
+title: "Harmony Prelim Review of Item Correspondence for Github"
+author: "Deanna Varley"
+date: "2024-11-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#-------------------------Description of This Script----------------------------
+
+#This script uses the harmonydata package to check for semantic similarity/
+#correspondence between different wordings of the same item from the same scale
+#where different wordings were used across different surveys/datasets.
+
+#----------------------Preparation and Loading Packages-------------------------
+#If necessary, uncomment and install the below packages:
+#install.packages("devtools")
+#devtools::install_github("harmonydata/harmony_r")
+#install.packages(tidyverse)
+#install.packages(dplyr)
+#install.packages(tidyr)
+#install.packages(knitr)
+#install.packages(kableExtra)
+#install.packages(flextable)
+#install.packages(readxl)
+#library(devtools)
+
+#Load the required packages:
+library(harmonydata)
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+library(flextable)
+library(readxl)
+
+harmonydata::set_url()
+
+#----------------------Set Working Drive, Load Data-----------------------------
+#Set working drive:
+setwd("~/Data Harmonisation Project/Content Analysis")
+
+#Load data
+dat1 <- read_xlsx("Survey Items.xlsx") #The xlsx file is a list of survey items.
+
+#Add an ID column to the dataframe
+dat1$id<-as.character(seq(1,nrow(dat1)))
+```
+
+
+```{r Checking Item Correspondence, echo=FALSE}
+
+#----------------------Checking Item Correspondence-----------------------------
+
+#The code below creates a function that checks for correspondence between 
+#differently worded versions of the same item and then returns the mean and 
+#range of the cosine similarity indices for all the pairs of differently worded
+#versions of the same survey item.
+
+#Creating function:
+check_correspondence <- function(scale_name, item_number) {
+  # Filter data for the given scale and item number
+  nested_list <- dat1 %>%
+    filter(Scale == scale_name & `Item Number` == item_number) %>%
+    group_by(Name) %>%
+    summarise(
+      instrument_name = first(Name),
+      questions = list(
+        lapply(1:n(), function(i) {
+          list(
+            question_no = id[i],
+            question_text = Items[i]
+          )
+        })
+      ),
+      .groups = 'drop'
+    ) %>%
+    # Convert to list of lists
+    mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+    pull(nested)
+  
+  # Perform the match using harmony_r package
+  match <- match_instruments(nested_list)
+  
+  # Extract the matrix of similarity values
+  df <- data.frame(match$matches[[1]])
+  for (x in 1:length(match$matches)) {
+    df[x, ] <- match$matches[[x]]
+  }
+  
+  # Compute correlation values
+  matrix_df <- as.matrix(df)
+  cor_values <- matrix_df[lower.tri(matrix_df, diag = FALSE)]
+  
+  # Calculate mean and range
+  item_mean <- mean(cor_values)
+  item_range <- range(cor_values)
+  
+  return(list(mean = item_mean, range = item_range))
+}
+
+#Creating function to process all items of a scale and return results in a table
+#Note: This function won't work for scales that need to pull corresponding 
+#items from multiple scales (e.g., the K10 as it has items that correspond to 
+#K6 and K5 items).
+process_scale <- function(scale_name, total_items) {
+  results <- data.frame(
+    Item = 1:total_items,
+    Mean = NA,
+    `Range (Min)` = NA,
+    `Range (Max)` = NA
+  )
+  
+  for (item_number in 1:total_items) {
+    res <- check_correspondence(scale_name, item_number)
+    results$Mean[item_number] <- res$mean
+    results$`Range (Min)`[item_number] <- res$range[1]
+    results$`Range (Max)`[item_number] <- res$range[2]
+  }
+  
+  return(results)
+}
+
+process_scale <- function(scale_name, total_items) {
+  results <- data.frame(
+    Item = 1:total_items,
+    Mean = NA,
+    `Range (Min)` = NA,
+    `Range (Max)` = NA,
+    check.names = FALSE
+  )
+  
+  for (item_number in 1:total_items) {
+    res <- check_correspondence(scale_name, item_number)
+    results$Mean[item_number] <- res$mean
+    results$`Range (Min)`[item_number] <- res$range[1]
+    results$`Range (Max)`[item_number] <- res$range[2]
+  }
+  
+  #Construct the object name by concatenating scale_name and "_results"
+  object_name <- paste0(scale_name, "_results")
+  
+  #Assign the results data frame to an object in the environment
+  assign(object_name, results, envir = .GlobalEnv)
+  
+  return(results)
+}
+
+#The code below creates a list of scales and their item counts (i.e., the number
+#of items in each scale), then creates a loop that runs the 'process_scale'
+#function for each scale in the list.
+
+#Define the scales and their item counts (i.e., the number of items in each scale):
+#Note that the list doesn't include scales that have multiple versions 
+#(e.g., K10, K6 and K5) as these require different code to pull items from 
+#multiple scales. These are coded separately below in separate code chunks.
+scales <- list(
+  "GHQ-12" = 12, 
+  "SDQ" = 25,
+  "CES-D" = 20,
+  "GADS" = 9 
+)
+
+#Loop over each scale in the scales list:
+for (scale_name in names(scales)) {
+  total_items <- scales[[scale_name]]  #Get the number of items for the scale
+  process_scale(scale_name, total_items)  #Call the function for each scale
+}
+
+#Create and display the results as tables:
+set_flextable_defaults(
+  font.family = "Times New Roman", font.size = 12, 
+  border.color = "black", big.mark = "", border.width = .5)
+
+table1 <- flextable(`GHQ-12_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the GHQ-12")
+table1
+
+table2 <- flextable(`PHQ-9_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the PHQ-9")
+table2
+
+table3 <- flextable(`PHQ-9 Modified (PHQ-9M)_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the PHQ-9 Modified")
+table3
+
+table4 <- flextable(`SDQ_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the SDQ")
+table4
+
+table5 <- flextable(`CES-D_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the CES-D")
+table5
+
+table6 <- flextable(`GADS_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the GADS")
+table6
+
+```
+
+```{r Checking Item Correspondence for K10, K6 and K5, echo = FALSE}
+
+#-------------Checking Item Correspondence for K10, K6 and K5-------------------
+
+#The below code chunk will check the item correspondence for the K10 items,
+#along with corresponding items from the K6 and the K5. 
+
+#Creating an empty dataframe that will later be used to store the results:
+K10_results <- data.frame(
+    Item = 1:10,
+    Mean = NA,
+    `Range (Min)` = NA,
+    `Range (Max)` = NA,
+    check.names = FALSE
+  )
+
+#Checking item correspondence for K10 item 1:
+#First create a nested list of all K10 item 1 items:
+nested_list_k101 <- dat1 %>%
+  filter(Scale=="K10" & `Item Number`==1) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k101)
+
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[1,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[1,"Range (Min)"] <- range[1]
+K10_results[1,"Range (Max)"] <- range[2]
+
+#K10 item 2
+nested_list_k102 <- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==2) | (Scale=="K6" & `Item Number`==1) | (Scale=="K5" & `Item Number`==1)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k102)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[2,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[2,"Range (Min)"] <- range[1]
+K10_results[2,"Range (Max)"] <- range[2]
+
+#K10 item 3
+nested_list_k103 <- dat1 %>%
+  filter(Scale=="K10" & `Item Number`==3) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k103)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[3,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[3,"Range (Min)"] <- range[1]
+K10_results[3,"Range (Max)"] <- range[2]
+
+#K10 item 4
+nested_list_k104 <- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==4) | (Scale=="K6" & `Item Number`==2) | (Scale=="K5" & `Item Number`==2)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k104)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[4,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[4,"Range (Min)"] <- range[1]
+K10_results[4,"Range (Max)"] <- range[2]
+
+#K10 item 5
+nested_list_k105 <- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==5) | (Scale=="K6" & `Item Number`==3) | (Scale=="K5" & `Item Number`==3)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k105)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[5,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[5,"Range (Min)"] <- range[1]
+K10_results[5,"Range (Max)"] <- range[2]
+
+#K10 item 6
+nested_list_k106 <- dat1 %>%
+  filter(Scale=="K10" & `Item Number`==6) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k106)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[6,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[6,"Range (Min)"] <- range[1]
+K10_results[6,"Range (Max)"] <- range[2]
+
+## Nested list of just the Kessler 10 item 7
+nested_list_k107 <- dat1 %>%
+  filter(Scale=="K10" & `Item Number`==7) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k107)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[7,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[7,"Range (Min)"] <- range[1]
+K10_results[7,"Range (Max)"] <- range[2]
+
+#K10 item 8
+nested_list_k108 <- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==8) | (Scale=="K6" & `Item Number`==4) | (Scale=="K5" & `Item Number`==4)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_k108)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[8,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[8,"Range (Min)"] <- range[1]
+K10_results[8,"Range (Max)"] <- range[2]
+
+#K10 Item 9
+nested_list_k109 <- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==9) | (Scale=="K6" & `Item Number`==5) | (Scale=="K5" & `Item Number`==5)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+
+match = match_instruments(nested_list_k109)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[9,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[9,"Range (Min)"] <- range[1]
+K10_results[9,"Range (Max)"] <- range[2]
+
+#K10 item 10
+nested_list_k1010 <- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==10) | (Scale=="K6" & `Item Number`==6)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_k1010)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+K10_results[10,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+K10_results[10,"Range (Min)"] <- range[1]
+K10_results[10,"Range (Max)"] <- range[2]
+
+#Create and display the results as a table:
+set_flextable_defaults(
+  font.family = "Times New Roman", font.size = 12, 
+  border.color = "black", big.mark = "", border.width = .5)
+
+table7 <- flextable(`K10_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the K10, K6 and K5")
+table7
+
+```
+
+``` {r Checking Item Correspondence for SF-36 Mental Health Focused Items, echo = FALSE}
+
+#---------Checking Item Correspondence for SF-36, SF-12 and SF-8----------------
+
+#The below code chunk will check the item correspondence for the SF-36 items
+#that are focused on mental health but excluding items focused on physical
+#health. This code also includes items from the SF-12 and SF-8 that match items
+#from the SF-36 when checking for item correspondence.
+#Items from the SF-36 that will be included: 17, 18, 19, 20, 23, 24, 25, 26,
+# 27, 28, 29, 30, 31, 32.
+#Note: The MHI-5 is comprised of items 24, 25, 26, 28 and 30 of the SF-36.
+
+#Creating an empty dataframe that will later be used to store the results:
+SF36_results <- data.frame(
+    Item = c(17,18,19,20,23,24,25,26,27,28,29,30,31,32),
+    Mean = NA,
+    `Range (Min)` = NA,
+    `Range (Max)` = NA,
+    check.names = FALSE
+  )
+
+#Checking item correspondence for SF-36 item 17:
+#First create a nested list of all versions of SF-36 item 17:
+nested_list_sf3617 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==17 ) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3617)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[1,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[1,"Range (Min)"] <- range[1]
+SF36_results[1,"Range (Max)"] <- range[2]
+
+#SF-36 item 18 and matching SF-12 item 6:
+nested_list_sf3618 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==18) | (Scale=="SF-12" & `Item Number`==6)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3618)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[2,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[2,"Range (Min)"] <- range[1]
+SF36_results[2,"Range (Max)"] <- range[2]
+
+#SF-36 item 19 and matching SF-12 item 7:
+nested_list_sf3619 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==19) | (Scale=="SF-12" & `Item Number`==7)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3619)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[3,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[3,"Range (Min)"] <- range[1]
+SF36_results[3,"Range (Max)"] <- range[2]
+
+#SF-36 item 20 and corresponding SF-12 item 12 and SF-8 item 6:
+nested_list_sf3620 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==20) | (Scale=="SF-12" & `Item Number`==12) | (Scale=="SF-8" & `Item Number`==6)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3620)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[4,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[4,"Range (Min)"] <- range[1]
+SF36_results[4,"Range (Max)"] <- range[2]
+
+#SF-36 item 23:
+nested_list_sf3623 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==23) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3623)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[5,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[5,"Range (Min)"] <- range[1]
+SF36_results[5,"Range (Max)"] <- range[2]
+
+#SF-36 item 24:
+nested_list_sf3624 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==24) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3624)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[6,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[6,"Range (Min)"] <- range[1]
+SF36_results[6,"Range (Max)"] <- range[2]
+
+#SF-36 item 25:
+nested_list_sf3625 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==25) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3625)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[7,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[7,"Range (Min)"] <- range[1]
+SF36_results[7,"Range (Max)"] <- range[2]
+
+#SF-36 item 26 and corresponding SF-12 item 9:
+nested_list_sf3626 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==26) | (Scale=="SF-12" & `Item Number`==9)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3626)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[8,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[8,"Range (Min)"] <- range[1]
+SF36_results[8,"Range (Max)"] <- range[2]
+
+#SF-36 item 27 and corresponding SF-12 item 10:
+nested_list_sf3627 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==27) | (Scale=="SF-12" & `Item Number`==10)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3627)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[9,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[9,"Range (Min)"] <- range[1]
+SF36_results[9,"Range (Max)"] <- range[2]
+
+#SF-36 item 28 and corresponding SF-12 item 11:
+nested_list_sf3628 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==28) | (Scale=="SF-12" & `Item Number`==11)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3628)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[10,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[10,"Range (Min)"] <- range[1]
+SF36_results[10,"Range (Max)"] <- range[2]
+
+#SF-36 item 29:
+nested_list_sf3629 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==29) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3629)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[11,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[11,"Range (Min)"] <- range[1]
+SF36_results[11,"Range (Max)"] <- range[2]
+
+#SF-36 item 30:
+nested_list_sf3630 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==30) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3630)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[12,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[12,"Range (Min)"] <- range[1]
+SF36_results[12,"Range (Max)"] <- range[2]
+
+#SF-36 item 31:
+nested_list_sf3631 <- dat1 %>%
+  filter(Scale=="SF-36" & `Item Number`==31) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3631)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[13,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[13,"Range (Min)"] <- range[1]
+SF36_results[13,"Range (Max)"] <- range[2]
+
+#SF-36 item 32 and corresponding SF-12 item 12:
+nested_list_sf3632 <- dat1 %>%
+  filter((Scale=="SF-36" & `Item Number`==32) | (Scale=="SF-12" & `Item Number`==12)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_sf3632)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SF36_results[14,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SF36_results[14,"Range (Min)"] <- range[1]
+SF36_results[14,"Range (Max)"] <- range[2]
+
+#Create and display the results as a table:
+set_flextable_defaults(
+  font.family = "Times New Roman", font.size = 12, 
+  border.color = "black", big.mark = "", border.width = .5)
+
+table8 <- flextable(`SF36_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the SF-36, SF-12 and SF-8")
+table8
+
+```
+
+``` {r Checking for Item Correspondence for PHQ-9 and PHQ-9M, echo = FALSE}
+
+#------------Checking Item Correspondence for PHQ-9 and PHQ-9M------------------
+
+#The below code chunk will check the item correspondence for the PHQ9 items,
+#along with corresponding items from the PHQ-9M (Modified for Teens). 
+
+#Creating an empty dataframe that will later be used to store the results:
+PHQ9_results <- data.frame(
+    Item = 1:10,
+    Mean = NA,
+    `Range (Min)` = NA,
+    `Range (Max)` = NA,
+    check.names = FALSE
+  )
+
+#Checking item correspondence for PHQ-9 item 1 and corresponding PHQ-9M item 2:
+#First create a nested list of all relevant items:
+nested_list_phq91 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==1) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==2)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq91)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[1,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[1,"Range (Min)"] <- range[1]
+PHQ9_results[1,"Range (Max)"] <- range[2]
+
+#PHQ9 item 2 and corresponding PHQ9M item 1:
+nested_list_phq92 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==2) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==1)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq92)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[2,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[2,"Range (Min)"] <- range[1]
+PHQ9_results[2,"Range (Max)"] <- range[2]
+
+#PHQ9 item 3 and corresponding PHQ9M item 3:
+nested_list_phq93 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==3) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==3)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq93)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[3,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[3,"Range (Min)"] <- range[1]
+PHQ9_results[3,"Range (Max)"] <- range[2]
+
+#PHQ9 item 4 and corresponding PHQ9M item 5:
+nested_list_phq94 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==4) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==5)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq94)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[4,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[4,"Range (Min)"] <- range[1]
+PHQ9_results[4,"Range (Max)"] <- range[2]
+
+#PHQ9 item 5 and corresponding PHQ9M item 4:
+nested_list_phq95 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==5) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==4)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq95)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[5,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[5,"Range (Min)"] <- range[1]
+PHQ9_results[5,"Range (Max)"] <- range[2]
+
+#PHQ9 item 6 and corresponding PHQ9M item 6:
+nested_list_phq96 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==6) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==6)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq96)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[6,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[6,"Range (Min)"] <- range[1]
+PHQ9_results[6,"Range (Max)"] <- range[2]
+
+#PHQ9 item 7 and corresponding PHQ9M item 7:
+nested_list_phq97 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==7) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==7)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq97)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[7,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[7,"Range (Min)"] <- range[1]
+PHQ9_results[7,"Range (Max)"] <- range[2]
+
+#PHQ9 item 8 and corresponding PHQ9M item 8:
+nested_list_phq98 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==8) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==8)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq98)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[8,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[8,"Range (Min)"] <- range[1]
+PHQ9_results[8,"Range (Max)"] <- range[2]
+
+#PHQ9 item 9 and corresponding PHQ9M item 9:
+nested_list_phq99 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==9) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==9)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq99)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[9,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[9,"Range (Min)"] <- range[1]
+PHQ9_results[9,"Range (Max)"] <- range[2]
+
+#PHQ9 item 10 and corresponding PHQ9M item 10:
+nested_list_phq910 <- dat1 %>%
+  filter((Scale=="PHQ-9" & `Item Number`==10) | (Scale=="PHQ-9 Modified (PHQ-9M)" & `Item Number`==10)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_phq910)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+PHQ9_results[10,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+PHQ9_results[10,"Range (Min)"] <- range[1]
+PHQ9_results[10,"Range (Max)"] <- range[2]
+
+#Create and display the results as a table:
+set_flextable_defaults(
+  font.family = "Times New Roman", font.size = 12, 
+  border.color = "black", big.mark = "", border.width = .5)
+
+table9 <- flextable(`PHQ9_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the PHQ-9 and PHQ-9M")
+table9
+
+```
+
+``` {r Checking Item Correspondence for SCAS 10 to 14 yrs and 15 to 17 yrs, echo = FALSE}
+
+#-------Checking Item Correspondence for SCAS 10-14yrs and SCAS 15-17yrs--------
+
+#The below code chunk will check the item correspondence for the SCAS items
+#from both versions of the SCAS (10-14 years and 15-17 years)
+#Note that it will only be possible to calculate correspondence for items that
+#match between the two scales, as the other items do not have more than one
+#version that occurs across all the surveys/datasets we identified, so the
+#correspondence for those items would be impossible to calculate.
+#This is the case for 4 items from the SCAS (15-17 years) that are not present
+#in the SCAS (10-14 years).
+
+#Creating an empty dataframe that will later be used to store the results:
+SCAS_results <- data.frame(
+    Item = 1:6,
+    Mean = NA,
+    `Range (Min)` = NA,
+    `Range (Max)` = NA,
+    check.names = FALSE
+  )
+
+#Checking item correspondence for SCAS 10-14 item 1 and SCAS 15-17 item 1:
+#First create a nested list of all relevant items:
+nested_list_scas1 <- dat1 %>%
+  filter((Scale=="SCAS - 10-14 years" & `Item Number`==1) | (Scale=="SCAS - 15-17 years" & `Item Number`==1)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_scas1)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SCAS_results[1,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SCAS_results[1,"Range (Min)"] <- range[1]
+SCAS_results[1,"Range (Max)"] <- range[2]
+
+#SCAS 10-14 item 2 and SCAS 15-17 item 2:
+nested_list_scas2 <- dat1 %>%
+  filter((Scale=="SCAS - 10-14 years" & `Item Number`==2) | (Scale=="SCAS - 15-17 years" & `Item Number`==2)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_scas2)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SCAS_results[2,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SCAS_results[2,"Range (Min)"] <- range[1]
+SCAS_results[2,"Range (Max)"] <- range[2]
+
+#SCAS 10-14 item 3 and SCAS 15-17 item 3:
+nested_list_scas3 <- dat1 %>%
+  filter((Scale=="SCAS - 10-14 years" & `Item Number`==3) | (Scale=="SCAS - 15-17 years" & `Item Number`==3)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_scas3)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SCAS_results[3,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SCAS_results[3,"Range (Min)"] <- range[1]
+SCAS_results[3,"Range (Max)"] <- range[2]
+
+#SCAS 10-14 item 4 and SCAS 15-17 item 8:
+nested_list_scas4 <- dat1 %>%
+  filter((Scale=="SCAS - 10-14 years" & `Item Number`==4) | (Scale=="SCAS - 15-17 years" & `Item Number`==8)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_scas4)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SCAS_results[4,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SCAS_results[4,"Range (Min)"] <- range[1]
+SCAS_results[4,"Range (Max)"] <- range[2]
+
+#SCAS 10-14 item 5 and SCAS 15-17 item 9:
+nested_list_scas5 <- dat1 %>%
+  filter((Scale=="SCAS - 10-14 years" & `Item Number`==5) | (Scale=="SCAS - 15-17 years" & `Item Number`==9)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_scas5)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SCAS_results[5,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SCAS_results[5,"Range (Min)"] <- range[1]
+SCAS_results[5,"Range (Max)"] <- range[2]
+
+#SCAS 10-14 item 6 and SCAS 15-17 item 10:
+nested_list_scas6 <- dat1 %>%
+  filter((Scale=="SCAS - 10-14 years" & `Item Number`==6) | (Scale=="SCAS - 15-17 years" & `Item Number`==10)) %>%
+  group_by(Name) %>%
+  summarise(
+    instrument_name = first(Name),  # Get the study name as instrument_name
+    questions = list(
+      lapply(1:n(), function(i) {
+        list(
+          question_no = id[i],
+          question_text = Items[i]
+        )
+      })
+    ),
+    .groups = 'drop'
+  ) %>%
+  # Convert to list of lists
+  mutate(nested = map2(instrument_name, questions, ~ list(instrument_name = .x, questions = .y))) %>%
+  pull(nested)
+
+match = match_instruments(nested_list_scas6)
+
+df <- data.frame(match$matches[[1]])
+for (x in 1:length(match$matches)) {
+  df[x, ] = match$matches[[x]]
+}
+colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" ") )
+
+matrix_df <-as.matrix(df)
+cor_values<-matrix_df[lower.tri(matrix_df, diag=FALSE)]
+SCAS_results[6,"Mean"] <- mean(cor_values)
+range<-range(cor_values)
+SCAS_results[6,"Range (Min)"] <- range[1]
+SCAS_results[6,"Range (Max)"] <- range[2]
+
+#Create and display the results as a table:
+set_flextable_defaults(
+  font.family = "Times New Roman", font.size = 12, 
+  border.color = "black", big.mark = "", border.width = .5)
+
+table10 <- flextable(`SCAS_results`) %>% 
+  bold(part = "header") %>% autofit() %>%
+  set_table_properties(width = 1.0, layout = "autofit") %>%
+  set_caption(caption = "Mean and Range of Item Correspondence Values for the SCAS (10-14 years) and the SCAS (15-17 years)")
+table10
+
+```
+
+
