@@ -1,0 +1,612 @@
+---
+title: "Using Harmony to Check for Matches Between Items from Different Scales"
+author: "Deanna Varley"
+date: "2024-11-20"
+output:
+  html_document:
+    df_print: paged
+---
+
+This walkthrough/tutorial shows you how to use the harmonydata package in R to:
+(1) identify all of the different versions of a scale item used across multiple 
+surveys/datasets.This is useful in instances where multiple surveys/datasets 
+to be harmonised contained the same scale, but the wording of each item in each 
+scale may have varied slightly across surveys - a common occurrence when
+working with data from more than one study/survey.
+(2) Identify the most commonly used wording of each item for each scale 
+used in the data we are planning to harmonise. 
+(3) Save the most commonly used wording of each item of each scale in a list 
+(one list per scale). 
+(4) Using the lists created, run functions from the harmonydata package to check 
+for matches between items from different scales (where 'matches' are items with 
+a high level of semantic similarity/correspondence). 
+(5) Save the indices of similarity between item pairs and identified matches 
+between items in lists, matrices or data frames, and then export the results to 
+csv files. 
+
+In this example, we'll be working with items from the following scales: the 
+GAD-7, the CES-D and the K10 (as well as variants of the K10 - the K6 and K5).
+
+First, let's install and load the R packages we'll need, set the working 
+directory, then load the data file we'll be using:
+
+```{r, warning=FALSE, message=FALSE}
+#----------------------Preparation and Loading Packages-------------------------
+
+#If you don't already have these packages installed in your R library, 
+#un-comment and run the below code:
+#install.packages("devtools") #This package is required to install the harmonydata package
+#devtools::install_github("harmonydata/harmony_r")
+#install.packages("dplyr") #Will be used for data manipulation.
+#install.packages(flextable) #Will be used for displaying results in formatted tables.
+#install.packages("readxl") #Note: A different R package would be required to 
+#import datafiles not in xlsx format
+
+#Load the required R libraries/packages:
+library(devtools)
+library(harmonydata)
+library(dplyr)
+library(flextable)
+library(readxl)
+harmonydata::set_url()
+
+#--------------------Set Working Directory, Load Data---------------------------
+
+#Set the working directory/file location R will use to find data files. E.g.:
+setwd("~/Data Harmonisation Project/Content Analysis")
+
+#Load the data and save to a dataframe object in the R environment:
+dat1 <- read_xlsx("Survey Items.xlsx") #The xlsx file is a list of survey items.
+
+#Add an ID column to the dataframe:
+dat1$id<-as.character(seq(1,nrow(dat1)))
+
+```
+
+Note: The data loaded contains the following columns/variables:
+Name (the study/survey name),
+Year (the study/survey year),
+Scale (the name of the scale),
+Item Number (a numeric variable indicating what item number a given item is within a given scale),
+Items (a text/string variable containing the text of each item from each scale),
+id (a unique identifier for each row).
+
+Now that we've loaded the R packages we'll need and our data, the first
+thing we'll do is inspect our data to make sure there are no errors in the data.
+Specifically, we want to check that the 'Item Number' variable in the data is 
+coded correctly throughout the dataset. Doing this will help us to detect any 
+errors in the data where items were recorded with the wrong 'Item Number' that 
+could interfere with the accuracy of the analyses we'll do later. 
+You can skip this step if you're confident that your data is recorded correctly. 
+In this example, we were working with a large datafile so we wanted to take this 
+extra precaution.
+
+To check the data for coding errors, we'll run the below code and then
+inspect the lists of items created to make sure everything looks right. In this
+example, we'll be checking that all of the different versions of items from
+the GAD-7 scale, the CES-D scale and the K10 scale in our data have their 
+'Item Number' variable coded correctly.
+
+Let's do this for the GAD-7 items first:
+
+``` {r}
+#-----------------Inspect Data to Check for Coding Errors-----------------------
+
+freqgad71i <- dat1 %>% #Start with dataframe 'dat1'
+  filter(Scale=="GAD-7" & `Item Number`==1) %>% #Filter rows where Scale is "GAD-7" and Item Number is 1
+  group_by(Items) %>% #Group by the 'Items' column
+  summarise(total=n()) #Count the number of rows in each group and store the results in a column called 'total' in an object called freqgad71i
+
+freqgad72i<- dat1 %>%
+  filter(Scale=="GAD-7" & `Item Number`==2) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqgad73i<- dat1 %>%
+  filter(Scale=="GAD-7" & `Item Number`==3) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqgad74i<- dat1 %>%
+  filter(Scale=="GAD-7" & `Item Number`==4) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqgad75i<- dat1 %>%
+  filter(Scale=="GAD-7" & `Item Number`==5) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqgad76i<- dat1 %>%
+  filter(Scale=="GAD-7" & `Item Number`==6) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqgad77i<- dat1 %>%
+  filter(Scale=="GAD-7" & `Item Number`==7) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+```
+
+Once you've created these lists, you can inspect the lists to make sure that 
+all of the items in the list are differently worded versions of the same item, 
+and that there aren't any items that are incorrectly coded.
+
+Now let's do the same thing for all the versions of each item from the CES-D 
+scale.
+
+```{r}
+#-----------------Inspect Data to Check for Coding Errors-----------------------
+
+#The below will identify the most commonly used wording of each CES-D item and
+#store them in individual objects for inspection to make sure the survey items
+#are all coded correctly:
+
+freqcesd1i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==1) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd2i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==2) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd3i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==3) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd4i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==4) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd5i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==5) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd6i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==6) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd7i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==7) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd8i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==8) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd9i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==9) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd10i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==10) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd11i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==11) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd12i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==12) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd13i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==13) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd14i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==14) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd15i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==15) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd16i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==16) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd17i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==17) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd18i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==18) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd19i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==19) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqcesd20i<- dat1 %>%
+  filter(Scale=="CES-D" & `Item Number`==20) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+```
+
+
+Now let's do the same thing for all the versions of each item from the K10 
+scale.
+
+Note: Because items from the K6 and K5 versions of the K10 are identical or 
+nearly identical to the corresponding items in the K10, the K6 and K5 versions 
+of each K10 item will be included when creating lists of all the differently 
+worded versions of each item. 
+
+```{r}
+#-----------------Inspect Data to Check for Coding Errors-----------------------
+
+freqK101i <- dat1 %>%  
+  filter(Scale == "K10" & `Item Number` == 1) %>%  
+  group_by(Items) %>%  #
+  summarise(total = n())  
+
+#The below code is annotated to show you how we're incorporating the items from
+#K6 and K5 into this code:
+freqK102i<- dat1 %>% #Start with dataframe 'dat1'
+  filter((Scale=="K10" & `Item Number`==2) | (Scale=="K6" & `Item Number`==1) | (Scale=="K5" & `Item Number`==1)) %>% #Filter rows where Scale is "K10" and Item Number is 2 OR where Scale is "K6" and Item Number is 1 OR where SCale is K5 and Item Number is 1.
+  group_by(Items) %>% #Group by the 'Items' column
+  summarise(total=n()) #Count the number of rows in each group and store the results in a column called 'total' in an object called freqK102i
+
+freqK103i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==3)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK104i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==4) | (Scale=="K6" & `Item Number`==2) | (Scale=="K5" & `Item Number`==2)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK105i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==5) | (Scale=="K6" & `Item Number`==3) | (Scale=="K5" & `Item Number`==3)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK106i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==6)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK107i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==7)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK108i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==8) | (Scale=="K6" & `Item Number`==4) | (Scale=="K5" & `Item Number`==4)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK109i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==9) | (Scale=="K6" & `Item Number`==5) | (Scale=="K5" & `Item Number`==5)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+
+freqK1010i<- dat1 %>%
+  filter((Scale=="K10" & `Item Number`==10) | (Scale=="K6" & `Item Number`==6)) %>%
+  group_by(Items) %>%
+  summarise(total=n())
+```
+
+If you identify any coding errors, correct them in your data before moving on.
+You could make any needed corrections using functions from the dplyr R package.
+
+Now, the next thing we'll do is to identify the most commonly used wording of 
+an item in instances where multiple surveys/datasets to be harmonised contained 
+the same  scale, but the wording of each item in each scale may have varied
+slightly across surveys. 
+(Note: For information about how to use Harmony to confirm that differently 
+worded versions of the same scale item can be considered to be 'matches' to 
+each other, see the other R tutorial available titled: "Harmony Walkthrough - 
+Using Harmony to Check for Correspondence Between Items Within the Same Scale").
+
+To do this, let's create a function that will help us identify the most 
+commonly used wordings of each item in a scale. For this example, we'll be 
+identifying the most commonly used versions of items from the GAD-7, CES-D and 
+the K10 scales, including matching items from variants of the K10: the K6 and K5. 
+The function will identify the most commonly used wording for each item and then 
+we'll store the most common versions of each item in a list.
+
+First, let's do this for the GAD-7:
+
+```{r}
+#--------------Identify Most Commonly Used Wording, Save in List----------------
+
+#The below code will create a function to identify the most 
+#commonly used wordings of items in the GAD-7:
+
+#First we define a function called `get_most_common_item_text` that takes two 
+#arguments: `scale` and `item_number`:
+get_most_common_item_text <- function(scale, item_number) {
+  # Start with the dataframe `dat1`
+  dat1 %>%
+    # Filter the rows where the `Scale` matches the scale specified using the 
+    #`scale` argument and the `Item Number` matches the provided `item_number`
+    filter(Scale == scale & `Item Number` == item_number) %>%
+    # Group the remaining rows by the `Items` column
+    group_by(Items) %>%
+    # Summarize the data by counting the number of occurrences for each unique value in the `Items` column
+    summarise(total = n(), .groups = 'drop') %>%
+    # Arrange the results in descending order of the `total` column (most frequent items first)
+    arrange(desc(total)) %>%
+    # Take the first row of the sorted data (i.e., the most common item)
+    slice(1) %>%
+    # Extract (pull) the value from the `Items` column of the selected row
+    pull(Items)
+}
+
+
+#Second let's create and populate a list that will store the most commonly used
+#version of each item from the GAD-7:
+GAD7 <- list(
+  instrument_name = "GAD-7", #We save the name of the instrument being processed in the list
+  questions = lapply(1:7, function(i) { #We use lapply to iterate over the 7 items of the GAD-7 scale
+    list( #For each item, we create a list with its question number and text
+      question_no = paste0("GAD7_", i), #We save a label for each question number in the list, e.g., "GAD7_1", "GAD7_2", etc.
+      question_text = get_most_common_item_text( #We call the function to get the most common wording of item 'i'
+        scale = "GAD-7", #Use the scale argument in the get_most_common_item_text function to specify the scale being processed ("GAD-7") - note that this must match the name of the instrument as it's recorded in your datafile.
+        item_number = i #Use the item number argument to specify the current item number (iterating through items 1 to 7, in this case). Here, we use 'i' as we previously specified 'i' as the placeholder indicating what item number is currently be iterated over using the lapply function. 
+      )
+    )
+  })
+)
+
+```
+
+
+Next, we'll do the same thing for the CES-D using the function we just created.
+
+```{r}
+#--------------Identify Most Commonly Used Wording, Save in List----------------
+
+#The code below uses the get_most_common_item_text function and creates and 
+#populates a list that will store the most commonly used version of each item 
+#from the CES-D:
+
+CESD <- list(
+  instrument_name = "CES-D", #We save the name of the instrument being processed in the list 
+  questions = lapply(1:20, function(i) { #We use lapply to iterate over the 20 items of the CES-D scale
+    list( #For each item, we create a list with its question number and text
+      question_no = paste0("CESD_", i), #We save a label for each question number in the list, e.g., "CESD_1", "CESD_2", etc.
+      question_text = get_most_common_item_text( #We call the function to get the most common wording of item 'i'
+        scale = "CES-D", #Use the scale argument in the get_most_common_item_text function to specify the scale being processed ("CES-D") - note that this must match the name of the instrument as it's recorded in your datafile.
+        item_number = i #Use the item number argument to specify the current item number (iterating through items 1 to 20, in this case)
+      )
+    )
+  })
+)
+
+```
+
+
+Next, we'll do the same thing for the K10 (and its variants: the K6 and K5). 
+However, we'll now create a new and slightly different function to identify the 
+most commonly used wording of each item from the K10, K6 and K5 as this function
+needs to work a bit differently from the one we used for the GAD-7 and the CES-D. 
+This is because we now want the function to be able to identify the most
+commonly used wording of each item from the K10, as well as the corresponding
+items from the K6 and  the K5.
+
+Here's how we can update the function to account for this:
+
+
+``` {r}
+#--------------Identify Most Commonly Used Wording, Save in List----------------
+
+#First let's create the function. This time the code defines a custom function, 
+#called get_most_common_item_text_K10, which is designed to retrieve the most 
+#common text for a specific item number within the K10, K6, or K5 scales. 
+#It finds the most common text for the specified item across the relevant scales, 
+#accounting for the mappings between K10, K6, and K5 items..
+get_most_common_item_text_K10 <- function(item_number) {
+  dat1 %>%
+    filter(
+      (Scale == "K10" & `Item Number` == item_number) |
+        (Scale == "K6" & `Item Number` == ifelse(item_number == 2, 1,  # K10_2 -> K6_1
+                                                 ifelse(item_number == 4, 2,  # K10_4 -> K6_2
+                                                        ifelse(item_number == 5, 3,  # K10_5 -> K6_3
+                                                               ifelse(item_number == 8, 4,  # K10_8 -> K6_4
+                                                                      ifelse(item_number == 9, 5,  # K10_9 -> K6_5
+                                                                             ifelse(item_number == 10, 6, #K10_10 -> K6_6
+                                                                                    NA))))))) |
+        (Scale == "K5" & `Item Number` == ifelse(item_number == 2, 1,  # K10_2 -> K5_1
+                                                 ifelse(item_number == 4, 2,  # K10_4 -> K5_2
+                                                        ifelse(item_number == 5, 3,  # K10_5 -> K5_3
+                                                               ifelse(item_number == 8, 4,  # K10_8 -> K5_4
+                                                                      ifelse(item_number == 9, 5,  # K10_9 -> K5_5
+                                                                             NA))))))) %>%
+    group_by(Items) %>%
+    summarise(total = n(), .groups = 'drop') %>%
+    arrange(desc(total)) %>%
+    slice(1) %>%
+    pull(Items)
+}
+
+#Now let's create and populate a list that will store the most commonly used
+#version of each item from the K10 (and the K6 and K5).
+K10 <- list(
+  instrument_name = "K10",
+  questions = lapply(1:10, function(i) {
+    list(
+      question_no = paste0("K10_", i),
+      question_text = get_most_common_item_text_K10(i)
+    )
+  })
+)
+
+```
+
+Now that we've identified the most commonly used wording of each item for each
+scale of interest to us and stored those items in lists, we can move on to using 
+functions from the harmonydata package to check for matches between items in 
+each scale.
+
+To do this, we can use the code below:
+
+```{r}
+#-----------------Harmony Tests for Matches Between Scales----------------------
+
+#In this example, we're only checking for matches between the GAD-7, CES-D and 
+#the K10 (and its variants), but you could adapt code shown below to
+#quickly check for matches between more than three scales as well.
+
+#First, we define a list of the scales we want to use to check for matches 
+#with another scale we'll specify later.
+#Here, be sure to make sure that you type out the name of the scale exactly
+#the same way as you did when making the lists of the most commonly worded 
+#versions of each item in each scale.
+scales_list <- c("CESD", "K10")
+
+#Note in the above code that we left out one of the three scales - this is the 
+#scale that will be compared to the other two scales.
+
+#Next, we tell R what our output directory is (where we want it to save exported
+#files to). Remember to update this to wherever you would like to save your files.
+output_directory <- "~/Data Harmonisation Project/Content Analysis" 
+
+#Now, we'll create a loop that will check for matches between the scale we specify
+#and all of the other scales we specified in our list of scales (`scales_list`).
+
+#Because we want the results produced by the code in the loop to be saved for
+#each scale we process through the loop, we first initialize an empty named 
+#list that will be used to store the variable pairs for each scale:
+all_variable_pairs <- list()
+
+#Now we use the below code to create and run the loop:
+for (scale in scales_list) {
+  instruments_list <- list(GAD7, get(scale))  #Here, we use get() to retrieve the actual scale object
+  match = match_instruments(instruments_list)  #Here, we use the match_instruments function from harmonydata to check for matches
+  df <- data.frame(match$matches[[1]]) #Here, we create a data frame from the matches
+  for (x in 1:length(match$matches)) {
+    df[x, ] = match$matches[[x]]
+  }
+  
+  #Then we set the column and row names in the data frame:
+  colnames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" "))
+  rownames(df) <- lapply(match$questions, function(x) paste(x$question_no,  x$question_text , sep=" "))
+  
+  #Then convert the dataframe to a matrix
+  matrix_df <- as.matrix(df)
+  
+  #Then we create a logical matrix to identify matches over the threshold we've decided to use to identify what is/isn't a 'match'.
+  logical_matrix <- (matrix_df > 0.70) | (matrix_df < -0.70)
+  
+  #Then we create a subset matrix with NA for non-matches
+  subset_matrix <- matrix_df
+  subset_matrix[!logical_matrix] <- NA
+  subset_matrix <- subset_matrix[rowSums(!is.na(subset_matrix)) > 0, colSums(!is.na(subset_matrix)) > 0]
+  
+  #Now we get the scale name for file naming
+  scale_name <- as.character(scale)  #We convert the scale name to a character variable for file naming
+  
+  #Now we write the matches to a CSV file. Remember to update the file name to something appropriate:
+  write.csv(subset_matrix, file.path(output_directory, paste0("matches_gad7_", scale_name, ".csv")), row.names = TRUE)
+  
+  #We find variable pairs that have matching indices that indicate a match:
+  matching_indices <- which(logical_matrix, arr.ind = TRUE)
+  
+  #We create a data frame for the variable pairs:
+  variable_pairs <- data.frame(
+    Var1 = rownames(matrix_df)[matching_indices[, 1]],
+    Var2 = colnames(matrix_df)[matching_indices[, 2]],
+    Value = matrix_df[matching_indices]
+  )
+  
+  #And then we remove self-pairs (where a match has been identified between a given item and itself)
+  variable_pairs <- variable_pairs[variable_pairs$Var1 != variable_pairs$Var2, ]
+  
+  #Then we save the variable pairs to the all_variable_pairs list using the scale name as the key
+  all_variable_pairs[[paste0("variable_pairs_", scale_name)]] <- variable_pairs
+  
+  #Then we write the variable pairs to a CSV file. Remember to update the file name to something appropriate:
+  write.csv(variable_pairs, file.path(output_directory, paste0("variable_pairs_gad7_", scale_name, ".csv")), row.names = FALSE)
+}
+
+#After running the loop, `all_variable_pairs` will contain a set of data frames, 
+#with one data frame for each scale that was used to check for matches with the
+#GAD-7.
+
+
+```
+
+You can also use R to display your results in a formatted table.
+
+```{r, echo=TRUE}
+#-------------------Display Results in Formatted Tables-------------------------
+
+#The below code will display the results in formatted tables.
+
+#First we set the default settings for tables created with the flextable package:
+set_flextable_defaults(
+  font.family = "Times New Roman", font.size = 12, 
+  border.color = "black", big.mark = "", border.width = .5)
+
+#To create tables for each set of results we stored in the list called
+# all_variable_pairs, we'll use another loop that will iterate over each set of
+#results and create a formatted table for each set of results.
+
+#To do this, we first initialize an empty named list that will be used to store
+#the tables:
+tables_list <- list()  
+
+for (name in names(all_variable_pairs)) {
+  #Get the current variable pairs dataframe
+  variable_pairs <- all_variable_pairs[[name]]
+  
+  #Rename columns in the dataframes as desired to what you want the column headers to say in the formatted table:
+  variable_pairs <- rename(variable_pairs, 
+                           `Item 1` = Var1,
+                           `Item 2` = Var2,
+                           `Similarity Score` = Value)
+  
+  #Create the table:
+  table <- flextable(variable_pairs) %>% 
+    bold(part = "header") %>% 
+    autofit() %>%
+    set_table_properties(width = 1.0, layout = "autofit") %>%
+    set_caption(caption = "Variable Pairs and Their Similarity Scores")
+  
+  #Store the table in the list
+  tables_list[[name]] <- table
+}
+
+#You can then use the below code to export the tables to a word doc format:
+for (name in names(tables_list)) {
+  save_as_docx(tables_list[[name]], path = file.path(output_directory, paste0(name, ".docx")))
+}
+
+#You can also display each table in R (in the viewer or within an RMarkdown/RNotebook file)
+tables_list$variable_pairs_K10 #For variable pairs between the GAD-7 and K10
+
+tables_list$variable_pairs_CESD #For variable pairs between the GAD-7 and CES-D
+
+```
+
+```{r}
+
+```
+
+
+
+
