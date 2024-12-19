@@ -1,0 +1,803 @@
+---
+title: "inventory data cleaning and matching"
+author: "Nidanur Basturk"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+This document provides a **generic and anonymized version** of the workflow used for creating the variable database of **The NextGen Harmonised Data Gateway Variable Database** at GESIS Leibniz Institute for the Social Sciences. This tool supports data harmonisation and can be accessed here: [NextGen Harmonised Data Gateway](https://infra4nextgen.com).
+
+Below are the steps for data cleaning, question matching, and similarity analysis using the `harmonydata` package.
+
+If you have questions about this script, please contact: **[nidanur.bastuerk@gesis.org]**
+
+
+#Set up
+
+## Session info
+
+```{r}
+## For replicability: session information 
+
+session_info <- print(sessionInfo())
+
+getwd()
+```
+
+R version 4.4.0 (2024-04-24 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 10 x64 (build 19045)
+
+
+
+
+```{r setup, include=FALSE}
+Sys.setenv(LANG = "en")
+## clean environment
+#rm(list = ls())
+
+# Define which packages needed for analyses
+p_needed <-
+  c("knitr",
+    "readxl",
+    "writexl",
+    "dplyr", 
+    "stargazer",
+    "ggplot2",
+    "viridis",
+    "rsample",
+    "data.table",
+    "matrixStats",
+    "webshot2",
+    "gt",
+    "harmonydata",
+    "janitor",
+    "purrr",
+    "text2vec")
+
+# Check which packages are already installed on  computer
+packages <- rownames(installed.packages())
+
+
+
+# Check which packages are not installed
+p_to_install <- p_needed[!(p_needed %in% packages)]
+
+if (length(p_to_install) > 0) {
+  install.packages(p_to_install)
+}
+sapply(p_needed, require, character.only = TRUE)
+
+
+# Set an option for the final document that can be produced from the .Rmd file.
+knitr::opts_chunk$set(echo = TRUE)
+
+
+```
+
+
+
+```{r}
+
+# Load required packages
+library(gt)
+library(webshot2)
+library(tidyverse)
+library(readxl)
+library(openxlsx)
+library(haven)
+library(labelled)
+library(harmonydata)
+library(janitor)
+library(purrr)
+library(dplyr)
+library(stringr)
+library(tidytext)
+library(writexl)
+
+
+```
+
+# Data Cleaning
+
+##Load and Inspect the Data 
+
+```{r}
+
+
+# Step 1: Load the Excel file and check the available sheet names
+file_path <- "data/Inventory_30102024.xlsx"  #question text, response categories, year, survey name and so on are stored here
+
+
+# Step 2: Load the selected sheet into a data frame and clean column names
+inventory_data <- read_excel(file_path) %>%
+  clean_names()  # Clean the column names for consistency
+
+# Step 3: Check the structure and column names of the loaded data
+colnames(inventory_data)  # View the column names
+#str(inventory_data)  # Check the structure of the data
+
+
+
+
+```
+
+
+## Add Unique Question Identifiers
+
+```{r}
+
+# Group by survey_name, create the question_number column, and select specific columns
+grouped_inventory_data <- inventory_data %>%
+  group_by(survey_name) %>%  # Group by survey_name
+  mutate(
+    question_number = paste0(survey_name, "_", year, "_", row_number())  # Create the custom question number
+  ) %>%
+  ungroup() %>%  # Ungroup to prevent further issues
+  select(
+    question_number, survey_name, year, 
+    item_text, response_categories_original, key  # Select only the specified columns
+  )
+
+#writexl::write_xlsx(grouped_inventory_data,"data/grouped_inventory_data.xlsx")
+
+```
+
+
+
+```{r}
+
+grouped_inventory_data <- read_excel("data/grouped_inventory_data.xlsx")
+View(grouped_inventory_data)
+
+```
+
+
+# Text Cleaning of Common Prefixes
+
+```{r text cleaning}
+
+
+# Common prefixes provided
+common_prefixes <- c(
+  "to what extent you agree or disagree with each of the following statements",
+  "please tell me whether you agree completely, agree somewhat, disagree somewhat or disagree completely with each statement.",
+  "could you please tell me on a scale of one to 10 how satisfied you are with each of the following items",
+  "how satisfied or dissatisfied were you with",
+  "how true is the following statement",
+  "the past 5 years, do you think",
+  "How much responsibility do you think",
+  "to what extent are you in favour or against",
+  "in your opinion, which of the following is",
+  "which of the reasons below explains why",
+  "how common, if at all, do you think",
+    "about how long would it take you to",
+    "about how many days in total",
+    "about how many",
+    "about how many hours per week",
+    "about how many years of",
+    "about how much time in total",
+    "about how often would you say",
+    "all in all how likely is it",
+    "all things considered how satisfied are you",
+    "although you may feel that",
+    "among people you have contact with on a typical weekday",
+    "a household may have different sources of income",
+    "a lot of people who come to live in",
+    "a variety of characteristics are listed here",
+    "according to you how many of your",
+  "do you have any of the following",
+    "do you agree or disagree",
+    "do you approve or disapprove",
+    "do you have very many reasons",
+    "do you think that",
+    "do you think the government should",
+    "during the time you were growing up",
+    "generally speaking",
+    "how frequently do you",
+    "how frequently do you make use of",
+    "how good or bad do you think",
+    "how important do you think",
+    "how important is it for",
+    "how likely do you think",
+   "how much do you agree or disagree with the following statements",
+    "how much",
+    "how much do you agree or disagree",
+    "how much do you agree",
+    "how often do you",
+    "how often has each of the following happened to you",
+    "how often if at all",
+    "how often in the past",
+    "how often would you say",
+    "how satisfied or dissatisfied have you been",
+    "how true do you think it is that",
+    "i am going to read some things",
+    "i am now going to read",
+    "if you had to choose which would you say",
+    "in general how often",
+    "in general how reliable would you rate",
+    "in general how satisfied are you with",
+    "in general how would you describe",
+    "in general how would you rate the quality of",
+    "in the last 12 months",
+    "in the last five years have you",
+    "in the past 4 weeks have you felt",
+    "in the past 12 months how often",
+    "in your main job",
+    "in your opinion about how many",
+    "in your opinion",
+    "in your opinion how fair or unfair",
+    "in your opinion how many people",
+    "listed below are various areas",
+    "looking at the list below",
+    "looking at this card how important is each of these things",
+    "on a scale from 0 to 10",
+    "over the last 12 months have you",
+    "please choose one option",
+    "please choose your answer",
+    "please choose your response",
+    "please choose your views on this scale",
+    "please indicate how much",
+    "please indicate to what extent",
+    "please indicate whether",
+    "please look at the following statements",
+    "please look at the following tasks",
+    "please say how much enjoyment",
+    "please say how much you agree",
+    "please tell me how",
+    "please tell me how often",
+    "please tell me to what extent",
+    "please tell me whether you agree or disagree",
+    "please think about the last time",
+    "please think back to",
+    "please tick one box",
+    "please tick one box for each statement",
+    "please use this card to",
+    "please use this card to guide",
+    "read out in reverse order and mark an answer for each",
+  "there are some things that many people cannot",
+    "thinking about your reasons for doing",
+    "thinking about your household’s total income",
+    "thinking about your usual income",
+    "thinking back in what year did you",
+    "thinking in general about nations",
+    "thinking just of the last 3 years",
+    "thinking now about politics",
+    "to what extent",
+    "to what extent do you agree or disagree",
+    "to what extent do you feel concerned",
+    "to what extent would you say",
+    "using this card",
+    "what do you think about",
+    "which do you think is better",
+    "which if any of the following do you believe in",
+    "which of these do you think"
+)
+
+# Sort prefixes by length in descending order to prioritize longer matches
+common_prefixes <- common_prefixes[order(nchar(common_prefixes), decreasing = TRUE)]
+
+# Function to clean question text
+clean_question_text <- function(text, prefixes) {
+  # Convert to lowercase
+  cleaned <- tolower(text)
+  
+  # Step 1: Remove each prefix, starting with the longest
+  for (prefix in prefixes) {
+    cleaned <- str_replace(cleaned, regex(paste0("^", prefix), ignore_case = TRUE), "")
+  }
+  
+  # Step 2: Remove common survey formatting elements
+ # cleaned <- str_remove_all(cleaned, "\\(.*?\\)")  # Remove parenthetical text
+  cleaned <- str_remove_all(cleaned, "\\[.*?\\]")  # Remove bracketed text
+  cleaned <- str_remove_all(cleaned, "[0-9]+\\)")  # Remove numbered bullets
+ # cleaned <- str_remove_all(cleaned, "\\s*\\d+\\s*")  # Remove standalone numbers
+  
+  # Step 3: Remove common survey stopwords
+  #survey_stop_words <- c("card", "following", "whether", "statements", "please", 
+                       #  "tell", "indicate", "using", "scale", "answer", "choose",
+                       #  "option", "best", "describes", "mark", "tick", "box")
+  
+  # Combine with standard English stop words (assuming 'stop_words' contains a list of standard stopwords)
+ # stop_words_combined <- unique(c(stop_words$word, survey_stop_words))
+  
+  # Split into words, remove stop words, and rejoin
+ # words <- str_split(cleaned, "\\s+")[[1]]
+ # words <- words[!words %in% stop_words_combined]
+ # cleaned <- paste(words, collapse = " ")
+  
+  # Clean up any remaining whitespace and punctuation
+  cleaned <- str_remove_all(cleaned, "[[:punct:]]")
+  cleaned <- str_squish(cleaned)
+  
+  return(cleaned)
+}
+
+
+```
+
+
+
+```{r Apply the function}
+
+# Apply the function to the dataframe using rowwise() for proper row-by-row processing
+grouped_inventory_data <- grouped_inventory_data %>%
+  rowwise() %>%
+  mutate(cleaned_question_pref = clean_question_text(item_text, common_prefixes)) %>%
+  ungroup()
+
+
+view(grouped_inventory_data)
+
+
+#writexl::write_xlsx(grouped_inventory_data, "data/grouped_inventory_data_clean.xlsx")
+
+```
+
+# Instrument Preparation
+
+# Prepare  Instrument List
+
+```{r}
+
+# Read data 
+full_data <- read_excel("data/full_data_inventory_and_suveyx_data_clean.xlsx")  # two datasets merged 
+
+# View the cleaned column names
+colnames(full_data)
+
+```
+
+
+```{r}
+# Step 2: Prepare the instruments by selecting relevant columns
+
+full_instrument <- full_data %>%
+  select(question_no = question_number, question_text = cleaned_question_pref)
+
+
+full_instrument <- full_instrument %>%
+  mutate(question_text = as.character(question_text))  # Ensure question_text is a string
+
+
+full_instrument <- full_instrument %>%
+  mutate(question_no = as.character(question_no))  # Ensure question_no is a string
+
+
+full_instrument <- full_instrument %>%
+  filter(!is.na(question_text) & question_text != "")
+
+full_instrument <- full_instrument %>%
+  mutate(question_text = str_squish(gsub("[^[:alnum:] [:punct:]]", "", question_text)))
+
+```
+
+
+```{r}
+# Define a function to prepare the full instrument in the desired format
+prepare_full_instrument <- function(data, instrument_name) {
+  # Create a list of questions where each question is a list with 'question_no' and 'question_text'
+  questions_list <- map(
+    seq_len(nrow(data)), 
+    ~ list(
+      question_no = data$question_no[.x],
+      question_text = data$question_text[.x]
+    )
+  )
+  
+  # Return the structured list
+  list(
+    instrument_name = instrument_name,
+    questions = questions_list
+  )
+}
+
+# Prepare the full instrument
+full_instrument_list <- prepare_full_instrument(full_instrument, "Full_Instrument")
+
+# Inspect the structure of the full instrument list
+str(full_instrument_list)
+
+```
+
+
+ISSUE:
+We have "full_data_inventory_and_suveyx_data_clean.xlsx" each row has metadata on a single survey item. Aim is to ask *match_instruments*  function to match each item with all others and calculate the similarity score for every possible match.The output supposed to be a list of 5 lists 
+                                  #[1] "instruments"  
+                                  #[2] "questions"                        
+                                 #[3] "matches"         
+                                  #[4] "query_similarity"                 
+                                 #[5]"closest_catalogue_instrument_matches" 
+                                 
+                                 You can run chunk {r match_instruments} the first part to see the output.
+
+
+But the function fails  when I attempt to do it for *full_instrument_list*.  It gives a list of 2 lists: html, head, body with no calculation results. 
+
+
+The alternative: I split the data to 5 different parts by survey code and then I did 10 pairs of matching in 10 independent code with the same function and the function works perfectly.
+
+*Nice to have* to make it all at once as we will have more data and want to have a more durable solution.:  
+
+
+
+```{r create instrument lists-1 }
+
+
+# Step 1: Split the data by survey code (first three digits of question_no)
+survey_groups <- full_instrument %>%
+  mutate(survey_code = substr(question_no, 1, 3)) %>%
+  group_by(survey_code) %>%
+  group_split()
+
+# Create a named list of surveys for easier access
+survey_data <- set_names(survey_groups, map_chr(survey_groups, ~ unique(.$survey_code)))
+
+str(survey_data)
+
+```
+
+
+
+
+
+```{r create instrument lists-2}
+
+
+# Create a named list of surveys for easier access
+survey_data <- set_names(survey_groups, map_chr(survey_groups, ~ unique(.$survey_code)))
+
+# Define a function to prepare each instrument in the correct format
+prepare_instrument <- function(data, instrument_name) {
+  questions_list <- map(
+    seq_len(nrow(data)), 
+    ~ list(
+      question_no = data$question_no[.x],
+      question_text = data$question_text[.x]
+    )
+  )
+  list(
+    instrument_name = instrument_name,
+    questions = questions_list
+  )
+}
+
+
+# Prepare instruments for each survey in survey_data
+instrument_A <- prepare_instrument(survey_data$Survey_A, "Survey_A")
+instrument_B <- prepare_instrument(survey_data$Survey_B, "Survey_B")
+instrument_C <- prepare_instrument(survey_data$Survey_C, "Survey_C")
+instrument_D <- prepare_instrument(survey_data$Survey_D, "Survey_D")
+instrument_E <- prepare_instrument(survey_data$Survey_E, "Survey_E")
+instrument_F <- prepare_instrument(survey_data$Survey_F, "Survey_F")
+
+# Store each prepared instrument in a list
+instruments <- list(Survey_A = instrument_A,
+                    Survey_B = instrument_B,
+                    Survey_C = instrument_C,
+                    Survey_D = instrument_D,
+                    Survey_E = instrument_E, 
+                    Survey_F = instrument_F)
+
+
+
+```
+
+
+
+# Match Instruments (Pairwise)
+
+```{r match_instruments}
+
+#This chunk is the only part where harmonydata used
+# loop and mapping give errors. So we do one by one. It takes 15-20 mins to run
+
+# Match instruments by pairs and display names of matches
+
+
+
+# Example pair matching:
+A_B_pair_matches <- match_instruments(list(instrument_A, instrument_B))
+A_C_pair_matches <- match_instruments(list(instrument_A, instrument_C))
+
+print(names(A_B_pair_matches)) # this must give:
+                                   #[1] "instruments"  
+                                  #[2] "questions"                        
+                                 #[3] "matches"         
+                                  #[4] "query_similarity"                 
+                                 #[5]"closest_catalogue_instrument_matches"
+
+# Continue similarly for other pairs
+
+```
+
+```{r match df all}
+
+# List the names of all variables ending with "_pair_matches"
+pair_match_list <- mget(ls(pattern = "_pair_matches$"))
+
+# Create an output folder if it doesn't exist
+output_folder <- "Match_Results"
+if (!dir.exists(output_folder)) {
+  dir.create(output_folder)
+}
+
+# Loop over each pair in the list
+for (pair_name in names(pair_match_list)) {
+  # Access the matches and questions for the current pair
+  pair_match <- pair_match_list[[pair_name]]
+  matches_batch <- pair_match$matches
+  questions_batch <- pair_match$questions
+  
+  # Initialize an empty data frame for results
+  match_df <- map_df(seq_along(questions_batch), function(i) {
+    question1_no <- questions_batch[[i]]$question_no
+    question1_text <- questions_batch[[i]]$question_text
+    
+    match_scores <- matches_batch[[i]]
+    
+    if (length(match_scores) > 0) {
+      map_df(seq_along(match_scores), function(j) {
+        matched_question_no <- questions_batch[[j]]$question_no
+        matched_question_text <- questions_batch[[j]]$question_text
+        match_score <- match_scores[[j]]
+        
+        # Only include matches with absolute score >= 0.60
+        abs_match_score <- abs(match_score)
+        if (abs_match_score >= 0.60) {
+          data.frame(
+            pair_name = pair_name,
+            question1_no = question1_no,
+            question1_text = question1_text,
+            question2_no = matched_question_no,
+            question2_text = matched_question_text,
+            match_score = match_score,
+            abs_match_score = abs_match_score,  # New column for absolute match score
+            stringsAsFactors = FALSE
+          )
+        } else {
+          NULL
+        }
+      })
+    } else {
+      NULL
+    }
+  })
+  
+  # Filter for matches between different surveys
+  match_filtered_df <- match_df %>%
+    filter(substr(question1_no, 1, 3) != substr(question2_no, 1, 3))
+  
+  # Remove duplicates where pairs of question numbers appear in reverse
+  unique_pairs_df <- match_filtered_df %>%
+    rowwise() %>%
+    mutate(
+      question_pair = paste(sort(c(question1_no, question2_no)), collapse = "_")
+    ) %>%
+    ungroup() %>%
+    distinct(question_pair, .keep_all = TRUE) %>%
+    select(-question_pair)
+  
+  # Step 1: Sort by `question1_no` and descending `match_score`
+  unique_pairs_df <- unique_pairs_df %>%
+    arrange(question1_no, desc(match_score))
+  
+  # Step 2: Identify the top 3 matches for each `question1_no`
+  unique_pairs_df <- unique_pairs_df %>%
+    group_by(question1_no) %>%
+    mutate(top_match = ifelse(row_number() <= 3, "Top 3", "")) %>%  # Mark top 3
+    ungroup()
+  
+  # Define the output file name and save
+  output_file <- file.path(output_folder, paste0(pair_name, "_Matches_60.xlsx"))
+ # write_xlsx(unique_pairs_df, output_file)
+  cat("Saved matches for", pair_name, "with absolute score >= 0.60 to", output_file, "\n")
+}
+
+
+```
+
+
+
+```{r All Matches Consolidated}
+
+
+# Define the main output folder and the subfolder for consolidated results
+output_folder <- "Match_Results"
+consolidated_folder <- file.path(output_folder, "All_Consolidated")
+
+# Create the consolidated folder if it doesn't exist
+if (!dir.exists(consolidated_folder)) {
+  dir.create(consolidated_folder)
+}
+
+# List all Excel files in the main output folder
+file_list <- list.files(path = output_folder, pattern = "*.xlsx", full.names = TRUE)
+
+# Initialize an empty list to store each data frame
+df_list <- lapply(file_list, read_excel)
+
+# Combine all data frames into a single data frame
+master_df  <- bind_rows(df_list)
+
+# Save the merged data frame as a new Excel file in the consolidated folder
+output_file <- file.path(consolidated_folder, "All_Matches_Consolidated.xlsx")
+# write_xlsx(master_df , output_file)
+
+cat("All data frames have been merged and saved as 'All_Matches_Consolidated.xlsx' in the 'All_Consolidated' folder.\n")
+
+
+str(master_df)
+
+
+```
+
+
+```{r}
+
+# Helper function to get matches with at least `min_surveys` distinct surveys
+get_multimatch_summary <- function(threshold, min_surveys) {
+  # Filter for matches with the absolute match score above the threshold
+  filtered_df <- master_df %>%
+    filter(abs_match_score > threshold)
+  
+  # Group by question1_no and summarize matching surveys and texts
+  summary_df <- filtered_df %>%
+    group_by(question1_no, question1_text) %>%
+    summarise(
+      matched_surveys = list(unique(question2_no)),  # List of unique matching question numbers
+      matched_texts = list(unique(question2_text)),  # List of unique matching texts
+      total_matches = n_distinct(substr(question2_no, 1, 3))  # Count distinct surveys
+    ) %>%
+    filter(total_matches >= min_surveys) %>%  # Filter based on minimum distinct surveys matched
+    mutate(
+      matched_surveys = sapply(matched_surveys, paste, collapse = ", "),
+      matched_texts = sapply(matched_texts, paste, collapse = " | ")
+    ) %>%
+    select(question1_no, question1_text, matched_surveys, matched_texts, total_matches)
+  
+  return(summary_df)
+}
+
+# Generate data frames for each combination of score thresholds and minimum survey counts
+matches_60_2 <- get_multimatch_summary(0.60, 2)
+matches_60_3 <- get_multimatch_summary(0.60, 3)
+matches_60_4 <- get_multimatch_summary(0.60, 4)
+
+matches_70_2 <- get_multimatch_summary(0.70, 2)
+matches_70_3 <- get_multimatch_summary(0.70, 3)
+matches_70_4 <- get_multimatch_summary(0.70, 4)
+
+matches_80_2 <- get_multimatch_summary(0.80, 2)
+matches_80_3 <- get_multimatch_summary(0.80, 3)
+matches_80_4 <- get_multimatch_summary(0.80, 4)
+
+matches_90_2 <- get_multimatch_summary(0.90, 2)
+matches_90_3 <- get_multimatch_summary(0.90, 3)
+matches_90_4 <- get_multimatch_summary(0.90, 4)
+
+matches_95_2 <- get_multimatch_summary(0.95, 2)
+matches_95_3 <- get_multimatch_summary(0.95, 3)
+matches_95_4 <- get_multimatch_summary(0.95, 4)
+
+str(matches_60_2)
+# Save each result to separate sheets in an Excel file
+# #write_xlsx(
+#   list(
+#     "Matches_60_2_Surveys"  = matches_60_2 ,
+#     "Matches_60_3_Surveys"   = matches_60_3 ,
+#     "Matches_60_4_Surveys"    = matches_60_4 , 
+#     "Matches_70_2_Surveys" = matches_70_2,
+#     "Matches_70_3_Surveys" = matches_70_3,
+#     "Matches_70_4_Surveys" = matches_70_4,
+#     "Matches_80_2_Surveys" = matches_80_2,
+#     "Matches_80_3_Surveys" = matches_80_3,
+#     "Matches_80_4_Surveys" = matches_80_4,
+#      "Matches_90_2_Surveys" = matches_90_2,
+#     "Matches_90_3_Surveys" = matches_90_3,
+#     "Matches_90_4_Surveys" = matches_90_4,
+#      "Matches_95_2_Surveys" = matches_95_2,
+#     "Matches_95_3_Surveys" = matches_95_3,
+#     "Matches_95_4_Surveys" = matches_95_4
+#   ),
+#   "Match_Results/All_Consolidated/Multi_Survey_Matches_Thresholds.xlsx"
+# )
+
+
+cat("Saved matches with different survey thresholds to Multi_Survey_Matches_Thresholds.xlsx\n")
+
+
+```
+
+
+
+# Post Output Cleaning and Merging
+
+##Create a Cross-tabulation
+
+```{r}
+#create a cross-tabulation of survey_name by each pillar and get the count of occurrences and totals
+# Objective:
+# This step creates a summary table showing how many survey items fall under each pillar (e.g., demographics, digital, equal, etc.)
+# across different surveys (`survey_name`). It also calculates the total number of survey items for each survey and overall.
+
+# Define pillars - these are the columns that categorize survey items into thematic areas
+pillar_columns <- c("demographics", "digital", "equal", "green", "healthy", "strong")
+
+# Create cross-tabulation: summarize the count of survey items for each survey and pillar
+cross_table <- full_data %>%
+  select(survey_name, all_of(pillar_columns)) %>%  # Select only the relevant columns: survey_name and pillar columns
+  pivot_longer(cols = all_of(pillar_columns), names_to = "pillar", values_to = "count") %>%  # Reshape from wide to long format
+  filter(!is.na(count)) %>%  # Remove rows with missing pillar data
+  group_by(survey_name, pillar) %>%  # Group by survey_name and pillar for aggregation
+  summarise(count = n(), .groups = 'drop') %>%  # Count occurrences for each survey and pillar
+  pivot_wider(names_from = pillar, values_from = count, values_fill = 0) %>%  # Reshape back to wide format with one column per pillar
+  rowwise() %>%  # Process each survey row individually
+  mutate(survey_total = sum(c_across(all_of(pillar_columns)))) %>%  # Calculate the total count of survey items per survey
+  ungroup() %>%  # Ungroup for further processing
+  adorn_totals("row")  # Add a grand total for all surveys across all pillars
+
+# Print the cross-table to review the summary
+print(cross_table)
+
+# Example Output (Simulated):
+# survey_name demographics digital equal healthy strong green survey_total
+#    A            3      56    55      52     50     0          216
+#   B            0      18    64     158    258     9          507
+
+# Save the cross-tabulation summary as an Excel file with the current date for traceability
+file_name <- paste0("data/Survey_Pillar_CrossTabulation_", Sys.Date(), ".xlsx")
+
+# Write the cross-table to an Excel file
+write_xlsx(cross_table, path = file_name)
+
+
+```
+
+
+## Enrich master_df with Original Information from full_data
+
+```{r}
+# Objective:
+# Enhance the `master_df` (containing pairwise matching results) by appending additional metadata from the original `full_data`.
+# This provides full context for the matched questions, including details like their survey, wave, topic, and response categories. 
+
+# Inspect input and output data structures
+# Input: `full_data` - contains the original survey metadata
+str(full_data)  # Columns include details like survey_name, year, item_text, pillars, etc.
+
+# Input: `master_df` - contains the pairwise matching results
+str(master_df)  # Columns include match scores, question pairs, and related data
+
+# Enrich `master_df` with additional metadata from `full_data` for both `question1_no` and `question2_no`
+
+# Step 1: Merge metadata for `question1_no` (first question in the pair) and add a prefix "q1_"
+master_df_enriched <- master_df %>%
+  left_join(full_data, by = c("question1_no" = "question_number")) %>%
+  rename_with(~paste0("q1_", .), matches(names(full_data)))  # Add "q1_" prefix to merged columns
+
+# Step 2: Merge metadata for `question2_no` (second question in the pair) and add a prefix "q2_"
+master_df_enriched <- master_df_enriched %>%
+  left_join(full_data, by = c("question2_no" = "question_number")) %>%
+  rename_with(~paste0("q2_", .), matches(names(full_data)))  # Add "q2_" prefix to merged columns
+
+# View the structure of the enriched dataframe
+str(master_df_enriched)
+
+# Example Columns After Enrichment:
+# 1. `pair_name` - Name of the pair match (e.g., "EQLS_ESS")
+# 2. `q1_question_no`, `q2_question_no` - Unique question identifiers for each question in the pair
+# 3. `q1_survey_name`, `q2_survey_name` - Surveys to which the matched questions belong
+# 4. `q1_topic`, `q2_topic` - Topics for each question
+# 5. `q1_response_categories_combined`, `q2_response_categories_combined` - Cleaned response categories for each question
+# 6. `match_score`, `abs_match_score`, `top_match` - Matching scores and ranking
+
+# Save the enriched data for further analysis and reporting
+output_file <- file.path("Match_Results/All_Consolidated/Enriched_Master_Data_All_Matches_Consolidated.xlsx")  # This filed used to manually judge matched pairs and to cluster similar items for the  variable database of each pillar. 
+
+write_xlsx(master_df_enriched, output_file)
+
+
+```
+
